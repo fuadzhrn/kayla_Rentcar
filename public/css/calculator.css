@@ -1,0 +1,586 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #f5f5f5;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* NAVBAR */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.logo span {
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #FFD700;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FFD700;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* CALCULATOR CONTAINER */
+.calculator-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 5% 3rem;
+    min-height: 100vh;
+}
+
+.calculator-container h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 3rem;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.calculator-container h1 span {
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* CALCULATOR WRAPPER */
+.calculator-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* VEHICLE SELECTION */
+.vehicle-selection {
+    display: flex;
+    justify-content: center;
+}
+
+.vehicle-preview {
+    background: rgba(20, 20, 20, 0.8);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    max-width: 100%;
+}
+
+.vehicle-preview:hover {
+    border-color: #FFD700;
+    box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
+}
+
+.vehicle-image {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: #FFD700;
+    margin: 0 auto 2rem;
+    margin-bottom: 1.5rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.vehicle-details {
+    text-align: center;
+}
+
+.vehicle-details h2 {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.5rem;
+    color: #f5f5f5;
+}
+
+.vehicle-price {
+    font-size: 1.8rem !important;
+    color: #FFD700;
+    font-weight: 700;
+    margin-bottom: 1.5rem !important;
+}
+
+.vehicle-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 8px;
+}
+
+.vehicle-features span {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+}
+
+.btn-change-vehicle {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid #FFD700;
+    color: #FFD700;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.btn-change-vehicle:hover {
+    background: #FFD700;
+    color: #000;
+}
+
+/* CALCULATOR FORM */
+.calculator-form {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    color: #FFD700;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    color: #f5f5f5;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* DURATION DISPLAY */
+.duration-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    flex-wrap: wrap;
+}
+
+.duration-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 100px;
+}
+
+.duration-label {
+    color: #b0b0b0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.duration-value {
+    color: #FFD700;
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.duration-arrow {
+    color: #FFD700;
+    font-size: 1.2rem;
+    opacity: 0.5;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .duration-arrow {
+        display: flex;
+    }
+}
+
+/* COST BREAKDOWN */
+.cost-breakdown {
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cost-breakdown h3 {
+    color: #FFD700;
+    margin-bottom: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    color: #b0b0b0;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    font-size: 0.95rem;
+}
+
+.breakdown-total {
+    display: flex;
+    justify-content: space-between;
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 1.1rem 2.8rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn i {
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+    color: #000;
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(255, 215, 0, 0.35);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    box-shadow: none;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+}
+
+/* CALCULATOR ACTIONS */
+.calculator-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.calculator-actions .btn {
+    flex: 1;
+    justify-content: center;
+}
+
+/* DISCLAIMER */
+.disclaimer {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* FOOTER */
+footer {
+    background: rgba(10, 10, 10, 0.95);
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    padding: 3rem 5%;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #b0b0b0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #FFD700;
+}
+
+.footer-section p {
+    color: #b0b0b0;
+    margin-bottom: 0.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #FFD700;
+    color: #000;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #b0b0b0;
+}
+
+/* ANIMATIONS */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .calculator-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .calculator-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .duration-display {
+        gap: 0.5rem;
+    }
+
+    .duration-item {
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    nav {
+        padding: 1rem 3%;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .calculator-container {
+        padding: 7rem 3% 2rem;
+    }
+
+    .calculator-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .calculator-wrapper {
+        gap: 1.5rem;
+    }
+
+    .vehicle-preview {
+        padding: 1.5rem;
+    }
+
+    .vehicle-image {
+        width: 150px;
+        height: 150px;
+        font-size: 3rem;
+    }
+
+    .vehicle-details h2 {
+        font-size: 1.5rem;
+    }
+
+    .vehicle-price {
+        font-size: 1.5rem !important;
+    }
+
+    .form-group input {
+        padding: 0.9rem;
+    }
+
+    .duration-display {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .duration-item {
+        width: 100%;
+    }
+
+    .duration-arrow {
+        transform: rotate(90deg) !important;
+        margin: 0.5rem 0 !important;
+    }
+
+    .cost-breakdown {
+        padding: 1rem;
+    }
+
+    .calculator-actions {
+        flex-direction: column;
+    }
+
+    .calculator-actions .btn {
+        width: 100%;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
