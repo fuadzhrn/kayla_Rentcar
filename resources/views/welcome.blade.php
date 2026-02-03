@@ -12,9 +12,23 @@
     <link rel="stylesheet" href="/css/landing.css">
 </head>
 <body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <div class="loading-car">
+                <i class="fas fa-car"></i>
+            </div>
+            <div class="loading-track">
+                <div class="loading-progress"></div>
+            </div>
+            <h2 class="loading-text">KAYLA <span>RENTCAR</span></h2>
+            <p class="loading-subtext">Perjalanan Anda dimulai dari sini...</p>
+        </div>
+    </div>
+
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">Kayla <span>Rentcar</span></div>
+        <div class="logo"><i class="fas fa-car"></i> Kayla <span>Rentcar</span></div>
         <ul class="nav-links">
             <li><a href="#home">Beranda</a></li>
             <li><a href="gallery">Gallery</a></li>
@@ -25,43 +39,76 @@
 
     <!-- HERO SECTION -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Sewa Mobil Impian Anda Bersama <span>Kayla Rentcar</span></h1>
-            <p>Nikmati pengalaman berkendara terbaik dengan armada mobil terlengkap, harga kompetitif, dan layanan pelanggan yang responsif. Perjalanan Anda adalah prioritas kami.</p>
+        <!-- Background -->
+        <div class="hero-bg"></div>
 
-            <div class="cta-buttons">
-                <a href="calculator" class="btn btn-primary">
-                    <i class="fas fa-car"></i> Sewa Sekarang
-                </a>
-                <a href="#vehicles" class="btn btn-secondary">
-                    <i class="fas fa-arrow-right"></i> Pelajari Lebih Lanjut
-                </a>
+        <!-- Content Wrapper -->
+        <div class="hero-container">
+            <!-- Left Column - Content -->
+            <div class="hero-left">
+                <h1 class="hero-title">
+                    Sewa Mobil Impian<br>
+                    Anda Bersama <span>Kayla</span><br>
+                    <span>Rentcar</span>
+                </h1>
+                <p class="hero-description">
+                    Nikmati pengalaman berkendara terbaik dengan armada mobil terlengkap, harga kompetitif, dan layanan pelanggan yang responsif. Perjalanan Anda adalah prioritas kami.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="calculator" class="btn btn-primary">
+                        <i class="fas fa-car"></i> Sewa Sekarang
+                    </a>
+                    <a href="#vehicles" class="btn btn-secondary">
+                        <i class="fas fa-arrow-right"></i> Pelajari Lebih Lanjut
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="hero-badges">
+                    <div class="badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>5000+ Pelanggan Puas</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Asuransi Lengkap</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-headset"></i>
+                        <span>Dukungan 24/7</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Image -->
+            <div class="hero-right">
+                <div class="hero-image-wrapper">
+                    <img src="/img/gambar_bg.png" alt="Car" class="hero-car-image">
+                </div>
             </div>
         </div>
-        <div class="hero-image">
-            <div class="card-stack" id="cardStack">
-                <div class="card card-front">
-                    <div class="card-image">
-                        <img src="/img/gambar_avanza.png" alt="Car">
-                    </div>
-                </div>
-                <div class="card card-middle">
-                    <div class="card-image">
-                        <img src="/img/gambar_ertiga_hybrid.png" alt="Car">
-                    </div>
-                </div>
-                <div class="card card-back">
-                    <div class="card-image">
-                        <img src="/img/gambar_wuling_confero.png" alt="Car">
-                    </div>
-                </div>
-            </div>
-        </div>
+    </section>
 
-        <div class="scroll-indicator">
-            <span>Scroll untuk eksplorasi</span>
-            <div class="scroll-arrow">
-                <i class="fas fa-chevron-down"></i>
+    <!-- STATS SECTION -->
+    <section class="stats">
+        <h2 class="section-title">Kepercayaan <span>Pelanggan</span></h2>
+        <div class="stats-grid">
+            <div class="stat-box scroll-fade">
+                <div class="stat-number" data-value="5000">5000+</div>
+                <div class="stat-label">Pelanggan Puas</div>
+            </div>
+            <div class="stat-box scroll-fade">
+                <div class="stat-number" data-value="150">150+</div>
+                <div class="stat-label">Kendaraan Tersedia</div>
+            </div>
+            <div class="stat-box scroll-fade">
+                <div class="stat-number" data-value="25000">25000+</div>
+                <div class="stat-label">Perjalanan Sukses</div>
+            </div>
+            <div class="stat-box scroll-fade">
+                <div class="stat-number" data-value="8">8+</div>
+                <div class="stat-label">Tahun Berpengalaman</div>
             </div>
         </div>
     </section>
@@ -99,6 +146,48 @@
                 <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
                 <h3>Booking Mudah</h3>
                 <p>Pesan mobil Anda dalam hitungan menit melalui aplikasi mobile atau website kami yang user-friendly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RENTAL TYPES SECTION -->
+    <section id="rental-types" class="rental-types">
+        <h2 class="section-title">Tipe <span>Sewa</span></h2>
+        <div class="rental-types-grid">
+            <div class="rental-card scroll-fade">
+                <div class="rental-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3>Lepas Kunci</h3>
+                <p>Sewa mobil tanpa driver. Anda bebas mengendarai sendiri sesuai kenyamanan Anda.</p>
+                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
+            </div>
+
+            <div class="rental-card scroll-fade">
+                <div class="rental-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <h3>Mobil + Driver</h3>
+                <p>Sewa mobil lengkap dengan driver profesional dan berpengalaman untuk perjalanan Anda.</p>
+                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
+            </div>
+
+            <div class="rental-card scroll-fade">
+                <div class="rental-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Driver Only</h3>
+                <p>Butuh driver untuk mobil pribadi Anda? Kami sediakan driver profesional siap melayani.</p>
+                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
+            </div>
+
+            <div class="rental-card scroll-fade">
+                <div class="rental-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h3>Antar Jemput Bandara</h3>
+                <p>Layanan antar jemput bandara dengan mobil nyaman dan driver yang ramah dan tepat waktu.</p>
+                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
             </div>
         </div>
     </section>
@@ -209,29 +298,6 @@
         </div>
     </section>
 
-    <!-- STATS SECTION -->
-    <section class="stats">
-        <h2 class="section-title">Kepercayaan <span>Pelanggan</span></h2>
-        <div class="stats-grid">
-            <div class="stat-box scroll-fade">
-                <div class="stat-number" data-value="5000">5000+</div>
-                <div class="stat-label">Pelanggan Puas</div>
-            </div>
-            <div class="stat-box scroll-fade">
-                <div class="stat-number" data-value="150">150+</div>
-                <div class="stat-label">Kendaraan Tersedia</div>
-            </div>
-            <div class="stat-box scroll-fade">
-                <div class="stat-number" data-value="25000">25000+</div>
-                <div class="stat-label">Perjalanan Sukses</div>
-            </div>
-            <div class="stat-box scroll-fade">
-                <div class="stat-number" data-value="8">8+</div>
-                <div class="stat-label">Tahun Berpengalaman</div>
-            </div>
-        </div>
-    </section>
-
     <!-- LOCATION SECTION -->
     <section id="location" class="location">
         <h2 class="section-title">Kunjungi <span>Kami</span></h2>
@@ -319,6 +385,11 @@
             <p>&copy; 2024 Kayla Rentcar. Semua hak dilindungi. | Design dengan <span style="color: #FFD700;">❤</span> untuk perjalanan Anda.</p>
         </div>
     </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/628123456789" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="/js/landing.js"></script>
 </body>
