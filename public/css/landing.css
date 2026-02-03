@@ -66,7 +66,7 @@ nav {
     left: 0;
     width: 0;
     height: 2px;
-    background: #FFD700;
+    background: #f1f1f1;
     transition: width 0.3s ease;
 }
 
