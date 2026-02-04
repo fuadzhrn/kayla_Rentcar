@@ -3,155 +3,188 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kalkulator Sewa - Kayla Rentcar</title>
+    <title>Sewa Mobil - Kalya Rentcar</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/calculator-new.css">
 </head>
 <body>
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">Kayla <span>Rentcar</span></div>
-        <ul class="nav-links">
+        <div class="logo"><i class="fas fa-car"></i> Kalya <span>Rentcar</span></div>
+        <ul class="nav-links" id="navLinks">
             <li><a href="/">Beranda</a></li>
             <li><a href="gallery">Gallery</a></li>
             <li><a href="/#vehicles">Kendaraan</a></li>
-            <li><a href="/#pricing">Paket</a></li>
-            <li><a href="/#contact">Kontak</a></li>
+            <li><a href="/#location">Alamat</a></li>
         </ul>
+        <button class="burger-menu" id="burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
-    <!-- CALCULATOR SECTION -->
-    <div class="calculator-container">
-        <h1>Kalkulator <span>Harga Sewa</span></h1>
-        
-        <div class="calculator-wrapper">
-            <!-- Vehicle Card -->
-            <div class="vehicle-selection">
-                <div class="vehicle-preview">
-                    <div class="vehicle-image" id="vehicleImage">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="vehicle-details">
-                        <h2 id="vehicleName">Pilih Kendaraan</h2>
-                        <p id="vehiclePrice" class="vehicle-price">Rp -</p>
-                        <div class="vehicle-features">
-                            <span id="vehiclePassengers">-</span>
-                            <span id="vehicleTransmission">-</span>
-                            <span id="vehicleAC">-</span>
+    <!-- RENTAL PAGE HEADER -->
+    <div class="rental-header">
+        <h1>Formulir <span>Sewa Mobil</span></h1>
+        <p>Isi data diri Anda dan pilih layanan yang diinginkan untuk melanjutkan pemesanan</p>
+    </div>
+
+    <!-- MAIN RENTAL CONTAINER -->
+    <div class="rental-main-container">
+        <div class="rental-wrapper">
+            <!-- LEFT: FORM -->
+            <div class="rental-form-section">
+                <form class="rental-form" id="rentalForm">
+                    <!-- PERSONAL INFO SECTION -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-user-circle"></i> Data Pemesan
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap <span class="required">*</span></label>
+                            <input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso" required>
                         </div>
-                        <button class="btn-change-vehicle" onclick="window.location.href='/#vehicles'">
-                            <i class="fas fa-exchange-alt"></i> Ubah Kendaraan
-                        </button>
+
+                        <div class="form-group">
+                            <label for="whatsapp">Nomor WhatsApp <span class="required">*</span></label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 081234567890" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="optional">(Opsional)</span></label>
+                            <input type="email" id="email" name="email" placeholder="Contoh: email@gmail.com">
+                        </div>
                     </div>
-                </div>
+
+                    <!-- SERVICE TYPE SECTION -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-concierge-bell"></i> Jenis Layanan
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label for="service">Pilih Layanan <span class="required">*</span></label>
+                            <select id="service" name="service" required onchange="updateServiceInfo()">
+                                <option value="">-- Pilih Layanan --</option>
+                                <option value="lepas-kunci">Lepas Kunci</option>
+                                <option value="mobil-driver">Mobil + Driver</option>
+                                <option value="driver-only">Driver Only</option>
+                                <option value="antar-jemput">Antar Jemput Bandara</option>
+                            </select>
+                        </div>
+
+                        <div class="service-info" id="serviceInfo">
+                            <p id="serviceDescription"></p>
+                        </div>
+                    </div>
+
+                    <!-- RENTAL DETAILS SECTION -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-calendar-check"></i> Detail Sewa
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label for="vehicle">Pilih Kendaraan <span class="required">*</span></label>
+                            <select id="vehicle" name="vehicle" required onchange="updateCalculator()">
+                                <option value="">-- Pilih Kendaraan --</option>
+                                <option value="honda-civic" data-price="450000">Honda Civic - Rp 450.000/hari</option>
+                                <option value="toyota-avanza" data-price="550000">Toyota Avanza - Rp 550.000/hari</option>
+                                <option value="toyota-innova" data-price="750000">Toyota Innova - Rp 750.000/hari</option>
+                                <option value="bmw-x3" data-price="1200000">BMW X3 - Rp 1.200.000/hari</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkin">Tanggal Sewa <span class="required">*</span></label>
+                                <input type="date" id="checkin" name="checkin" required onchange="calculateDays()">
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout">Tanggal Kembali <span class="required">*</span></label>
+                                <input type="date" id="checkout" name="checkout" required onchange="calculateDays()">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="days">Durasi Sewa</label>
+                            <input type="number" id="days" name="days" value="1" min="1" readonly>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-check-circle"></i> Lanjutkan Pemesanan
+                    </button>
+                </form>
             </div>
 
-            <!-- Calculator Form -->
-            <div class="calculator-form">
-                <div class="form-group">
-                    <label for="startDate">
-                        <i class="fas fa-calendar-alt"></i> Tanggal Mulai Sewa
-                    </label>
-                    <input type="date" id="startDate" onchange="calculateTotal()">
-                </div>
+            <!-- RIGHT: CALCULATOR -->
+            <div class="calculator-sidebar">
+                <div class="calculator-card">
+                    <h3 class="calculator-title">
+                        <i class="fas fa-calculator"></i> Kalkulator Harga
+                    </h3>
+                    
+                    <div class="calculator-content">
+                        <div class="calc-item">
+                            <span class="calc-label">Kendaraan</span>
+                            <span class="calc-value" id="calcVehicle">-</span>
+                        </div>
 
-                <div class="form-group">
-                    <label for="endDate">
-                        <i class="fas fa-calendar-alt"></i> Tanggal Akhir Sewa
-                    </label>
-                    <input type="date" id="endDate" onchange="calculateTotal()">
-                </div>
+                        <div class="calc-item">
+                            <span class="calc-label">Harga/Hari</span>
+                            <span class="calc-value" id="calcPrice">Rp 0</span>
+                        </div>
 
-                <!-- Duration Display -->
-                <div class="duration-display">
-                    <div class="duration-item">
-                        <span class="duration-label">Jumlah Hari</span>
-                        <span class="duration-value" id="durationDays">0</span>
-                    </div>
-                    <div class="duration-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <div class="duration-item">
-                        <span class="duration-label">Harga per Hari</span>
-                        <span class="duration-value" id="pricePerDay">Rp -</span>
-                    </div>
-                    <div class="duration-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <div class="duration-item">
-                        <span class="duration-label">Total Harga</span>
-                        <span class="duration-value" id="totalPrice">Rp -</span>
-                    </div>
-                </div>
+                        <div class="calc-item">
+                            <span class="calc-label">Durasi</span>
+                            <span class="calc-value" id="calcDays">0 hari</span>
+                        </div>
 
-                <!-- Cost Breakdown -->
-                <div class="cost-breakdown">
-                    <h3>Rincian Biaya</h3>
-                    <div class="breakdown-item">
-                        <span>Subtotal (<span id="breakdownDays">0</span> hari × Rp <span id="breakdownPricePerDay">0</span>)</span>
-                        <span id="breakdownSubtotal">Rp 0</span>
-                    </div>
-                    <div class="breakdown-total">
-                        <span>Total Pembayaran</span>
-                        <span id="breakdownTotal">Rp 0</span>
+                        <div class="calc-divider"></div>
+
+                        <div class="calc-item subtotal">
+                            <span class="calc-label">Subtotal</span>
+                            <span class="calc-value" id="calcSubtotal">Rp 0</span>
+                        </div>
+
+                        <div class="calc-item">
+                            <span class="calc-label">Asuransi (10%)</span>
+                            <span class="calc-value" id="calcInsurance">Rp 0</span>
+                        </div>
+
+                        <div class="calc-item">
+                            <span class="calc-label">Admin Fee</span>
+                            <span class="calc-value" id="calcAdmin">Rp 25.000</span>
+                        </div>
+
+                        <div class="calc-divider"></div>
+
+                        <div class="calc-item grand-total">
+                            <span class="calc-label">Total Harga</span>
+                            <span class="calc-value" id="calcTotal">Rp 0</span>
+                        </div>
+
+                        <p class="calculator-note">
+                            <i class="fas fa-info-circle"></i> Harga akan diupdate sesuai pilihan Anda
+                        </p>
                     </div>
                 </div>
-
-                <!-- Action Buttons -->
-                <div class="calculator-actions">
-                    <button class="btn btn-secondary" onclick="resetCalculator()">
-                        <i class="fas fa-redo"></i> Reset
-                    </button>
-                    <button class="btn btn-primary" onclick="bookNow()">
-                        <i class="fas fa-check-circle"></i> Pesan Sekarang
-                    </button>
-                </div>
-
-                <p class="disclaimer">
-                    <i class="fas fa-info-circle"></i> Klik tombol "Pesan Sekarang" untuk melanjutkan ke proses booking
-                </p>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Kayla Rentcar</h4>
-                <p>Solusi rental mobil terpercaya dengan harga kompetitif dan layanan terbaik.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Navigasi</h4>
-                <ul>
-                    <li><a href="/">Beranda</a></li>
-                    <li><a href="gallery">Gallery</a></li>
-                    <li><a href="/#vehicles">Kendaraan</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Kontak</h4>
-                <p><i class="fas fa-phone"></i> +62 123 456 7890</p>
-                <p><i class="fas fa-envelope"></i> info@kaylarentcar.com</p>
-            </div>
-            <div class="footer-section">
-                <h4>Sosial Media</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Kayla Rentcar. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/628123456789" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <script src="/js/calculator.js"></script>
+    <script src="/js/calculator-new.js"></script>
 </body>
 </html>

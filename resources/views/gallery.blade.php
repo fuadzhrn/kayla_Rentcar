@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gallery - Kayla Rentcar</title>
+    <title>Gallery - Kalya Rentcar</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,19 +14,23 @@
 <body>
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">Kayla <span>Rentcar</span></div>
-        <ul class="nav-links">
+        <div class="logo"><i class="fas fa-car"></i> Kalya <span>Rentcar</span></div>
+        <ul class="nav-links" id="navLinks">
             <li><a href="/">Beranda</a></li>
             <li><a href="gallery">Gallery</a></li>
             <li><a href="/#vehicles">Kendaraan</a></li>
-            <li><a href="/#pricing">Paket</a></li>
-            <li><a href="/#contact">Kontak</a></li>
+            <li><a href="/#location">Alamat</a></li>
         </ul>
+        <button class="burger-menu" id="burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
     <!-- GALLERY HEADER -->
     <div class="gallery-header">
-        <h1>Gallery <span>Kayla Rentcar</span></h1>
+        <h1>Gallery <span>Kalya Rentcar</span></h1>
         <p>Dokumentasi lengkap armada dan layanan kami</p>
     </div>
 
@@ -35,18 +39,6 @@
         <div class="gallery-filters">
             <button class="filter-btn active" data-filter="all">
                 <i class="fas fa-th"></i> Semua
-            </button>
-            <button class="filter-btn" data-filter="interior">
-                <i class="fas fa-chair"></i> Interior
-            </button>
-            <button class="filter-btn" data-filter="exterior">
-                <i class="fas fa-car"></i> Exterior
-            </button>
-            <button class="filter-btn" data-filter="event">
-                <i class="fas fa-camera"></i> Event
-            </button>
-            <button class="filter-btn" data-filter="fasilitas">
-                <i class="fas fa-cogs"></i> Fasilitas
             </button>
         </div>
 
@@ -204,13 +196,13 @@
         <!-- PAGINATION CONTROLS -->
         <div class="pagination-controls">
             <button class="pagination-btn" id="prevBtn" onclick="previousPage()">
-                <i class="fas fa-chevron-left"></i> Sebelumnya
+                <i class="fas fa-chevron-left"></i> <span class="btn-text">Sebelumnya</span>
             </button>
             <span class="pagination-info">
                 Halaman <span id="currentPage">1</span> dari <span id="totalPages">2</span>
             </span>
             <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
-                Berikutnya <i class="fas fa-chevron-right"></i>
+                <span class="btn-text">Berikutnya</span> <i class="fas fa-chevron-right"></i>
             </button>
         </div>
     </div>
@@ -232,36 +224,47 @@
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>Kayla Rentcar</h4>
-                <p>Solusi rental mobil terpercaya dengan harga kompetitif dan layanan terbaik.</p>
+                <h5>Tentang Kalya Rentcar</h5>
+                <p>Kami adalah penyedia layanan rental mobil terpercaya dengan pengalaman lebih dari 8 tahun. Komitmen kami adalah memberikan layanan terbaik untuk setiap pelanggan.</p>
             </div>
             <div class="footer-section">
-                <h4>Navigasi</h4>
+                <h5>Menu Cepat</h5>
                 <ul>
                     <li><a href="/">Beranda</a></li>
                     <li><a href="gallery">Gallery</a></li>
                     <li><a href="/#vehicles">Kendaraan</a></li>
+                    <li><a href="/#location">Alamat</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Kontak</h4>
-                <p><i class="fas fa-phone"></i> +62 123 456 7890</p>
-                <p><i class="fas fa-envelope"></i> info@kaylarentcar.com</p>
+                <h5>Layanan</h5>
+                <ul>
+                    <li><a href="/#rental-types">Lepas Kunci</a></li>
+                    <li><a href="/#rental-types">Mobil + Driver</a></li>
+                    <li><a href="/#rental-types">Driver Only</a></li>
+                    <li><a href="/#rental-types">Antar Jemput Bandara</a></li>
+                    <li><a href="/#rental-types">Wisata Tour Dalam & Luar Kota</a></li>
+                </ul>
             </div>
             <div class="footer-section">
-                <h4>Sosial Media</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                </div>
+                <h5>Hubungi Kami</h5>
+                <ul>
+                    <li><a href="tel:+62812345678"><i class="fas fa-phone"></i> +62 812-345-678</a></li>
+                    <li><a href="mailto:info@kalyarentcar.com"><i class="fas fa-envelope"></i> info@kalyarentcar.com</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</a></li>
+                    <li style="margin-top: 1rem;">
+                        <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #FFD700;"><i class="fab fa-twitter"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Kayla Rentcar. All rights reserved.</p>
+            <p>&copy; 2024 Kalya Rentcar. Semua hak dilindungi. | Design dengan <span style="color: #FFD700;">❤</span> untuk perjalanan Anda.</p>
         </div>
     </footer>
 

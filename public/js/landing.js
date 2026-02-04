@@ -1,3 +1,24 @@
+// Burger Menu Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navLinks = document.getElementById('navLinks');
+
+    if (burgerMenu && navLinks) {
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+});
+
 // Loading Screen
 document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loadingScreen');
@@ -88,23 +109,45 @@ window.addEventListener('scroll', () => {
 let vehicleCurrentSlide = 0;
 const vehicleCards = document.querySelectorAll('.vehicle-card');
 const vehicleTotalSlides = vehicleCards.length;
-const itemsPerView = 4;
-const maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
+
+function getItemsPerView() {
+    if (window.innerWidth <= 767) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 4;
+}
+
+function getItemWidth() {
+    if (window.innerWidth <= 767) return 100;
+    if (window.innerWidth <= 1024) return 50;
+    return 25;
+}
+
+let itemsPerView = getItemsPerView();
+let maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
 
 function initSlider() {
     const dotsContainer = document.getElementById('sliderDots');
+    dotsContainer.innerHTML = ''; // Clear existing dots
+    
+    // Recalculate based on current window size
+    itemsPerView = getItemsPerView();
+    maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
+    
     for (let i = 0; i <= maxVehicleSlide; i++) {
         const dot = document.createElement('div');
         dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
         dot.onclick = () => goToVehicleSlide(i);
         dotsContainer.appendChild(dot);
     }
+    vehicleCurrentSlide = 0;
     updateVehicleSlider();
 }
 
 function updateVehicleSlider() {
     const slider = document.querySelector('.vehicles-slider');
-    const offset = -vehicleCurrentSlide * (25 + 2/16) + '%';
+    const itemWidth = getItemWidth();
+    const gap = window.innerWidth <= 767 ? 0.5 : 2/16;
+    const offset = -vehicleCurrentSlide * (itemWidth + gap) + '%';
     slider.style.transform = `translateX(${offset})`;
     
     document.querySelectorAll('.slider-dot').forEach((dot, index) => {
@@ -129,3 +172,26 @@ function goToVehicleSlide(index) {
 
 // Initialize slider when page loads
 document.addEventListener('DOMContentLoaded', initSlider);
+
+// Re-initialize slider on window resize
+window.addEventListener('resize', () => {
+    const newItemsPerView = getItemsPerView();
+    if (newItemsPerView !== itemsPerView) {
+        initSlider();
+    }
+});
+
+// Rental Slider
+
+// Grid layout for rental types (no slider needed)
+document.addEventListener('DOMContentLoaded', () => {
+    initSlider();
+});
+
+// Re-initialize slider on window resize
+window.addEventListener('resize', () => {
+    const newItemsPerView = getItemsPerView();
+    if (newItemsPerView !== itemsPerView) {
+        initSlider();
+    }
+});

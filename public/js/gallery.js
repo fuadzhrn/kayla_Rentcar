@@ -1,7 +1,29 @@
+// ========== BURGER MENU TOGGLE ==========
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navLinks = document.getElementById('navLinks');
+
+    if (burgerMenu && navLinks) {
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+});
+
 // Gallery Filter and Pagination
 const filterBtns = document.querySelectorAll('.filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
-const itemsPerPage = 12;
+// Responsive items per page
+const itemsPerPage = window.innerWidth <= 767 ? 6 : 12;
 let currentPage = 1;
 let currentFilter = 'all';
 let filteredItems = [];

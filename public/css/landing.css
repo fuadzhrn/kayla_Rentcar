@@ -221,6 +221,37 @@ nav {
     width: 100%;
 }
 
+/* BURGER MENU */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 0.35rem;
+}
+
+.burger-menu span {
+    width: 25px;
+    height: 3px;
+    background: #f5f5f5;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.burger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.burger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
 /* HERO */
 .hero {
     min-height: 100vh;
@@ -252,7 +283,6 @@ nav {
     gap: 0;
     z-index: 2;
     position: relative;
-    
 }
 
 /* Left Column */
@@ -362,12 +392,10 @@ nav {
 
 /* Right Column - Image */
 .hero-right {
-    /* flex: 1.3; */
     display: flex;
     align-items: center;
     justify-content: flex-end;
     animation: fadeInRight 1s ease-out;
-    /* padding-right: 3%; */
     z-index: -1;
     position: relative;
 }
@@ -468,11 +496,56 @@ nav {
     border-top: 1px solid rgba(255, 215, 0, 0.1);
 }
 
-.rental-types-grid {
+.rental-types-slider-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
+}
+
+.rental-types-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Desktop: 3 cards per row, 2 cards di bawah center */
+@media (min-width: 1025px) {
+    .rental-card {
+        grid-column: span 2;
+    }
+    
+    .rental-card:nth-child(4) {
+        grid-column: 2 / span 2;
+    }
+    
+    .rental-card:nth-child(5) {
+        grid-column: 4 / span 2;
+    }
+}
+
+/* Tablet: 2 cards per row */
+@media (max-width: 1024px) {
+    .rental-types-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 767px) {
+    .rental-types-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rental-types-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    overflow: visible;
+    width: 100%;
+    transition: none;
 }
 
 .rental-card {
@@ -486,6 +559,8 @@ nav {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    min-height: 100%;
+    height: 100%;
 }
 
 .rental-card:hover {
@@ -520,6 +595,13 @@ nav {
     color: #b0b0b0;
     line-height: 1.6;
     flex-grow: 1;
+}
+
+.rental-slider-dots {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 .rental-btn {
@@ -627,6 +709,13 @@ nav {
     overflow: hidden;
 }
 
+.vehicle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .vehicle-info {
     padding: 1.5rem;
 }
@@ -689,6 +778,7 @@ nav {
 }
 
 .slider-btn {
+    display: none !important;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -698,7 +788,6 @@ nav {
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -987,14 +1076,14 @@ nav {
 
 /* LOCATION */
 .location {
-    padding: 5rem 5%;
+    padding: 3rem 5%;
 }
 
 .location-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-top: 3rem;
+    gap: 2rem;
+    margin-top: 2rem;
     align-items: center;
 }
 
@@ -1166,8 +1255,8 @@ html {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .rental-types-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .rental-types-slider-container {
+        gap: 1rem;
     }
 
     .vehicle-card {
@@ -1233,11 +1322,38 @@ html {
     }
 
     .logo {
-        font-size: 1.4rem;
+        font-size: 1rem;
+    }
+
+    .logo i {
+        font-size: 1.2rem;
     }
 
     .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem 3%;
+        z-index: 999;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 0.8rem 0;
+        font-size: 0.9rem;
+    }
+
+    .burger-menu {
+        display: flex;
     }
 
     .hero {
@@ -1253,21 +1369,45 @@ html {
     .hero-title {
         font-size: 1.8rem;
         margin-bottom: 1.2rem;
+        text-align: center;
     }
 
     .hero-description {
         font-size: 0.95rem;
         margin-bottom: 1.5rem;
+        text-align: justify;
     }
 
     .hero-buttons {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
         gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-buttons .btn i {
+        display: none;
+    }
+
+    .hero-buttons .btn {
+        flex: 1;
+        min-width: 140px;
+        max-width: 180px;
+        text-align: center;
     }
 
     .hero-badges {
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
+        justify-items: center;
+        margin-top: 2rem;
+    }
+
+    .hero-badges .badge:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
     }
 
     .badge {
@@ -1277,7 +1417,6 @@ html {
     .btn {
         padding: 0.9rem 1.5rem;
         font-size: 0.95rem;
-        width: 100%;
         justify-content: center;
     }
 
@@ -1308,9 +1447,12 @@ html {
         padding: 3rem 3%;
     }
 
+    .rental-types-slider-container {
+        gap: 1rem;
+    }
+
     .rental-types-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
 
     .rental-card {
@@ -1373,6 +1515,10 @@ html {
     .vehicle-image {
         height: 150px;
         font-size: 2.5rem;
+    }
+
+    .vehicle-card {
+        flex: 0 0 calc(100% - 0.5rem);
     }
 
     .vehicle-specs {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kayla Rentcar - Solusi Rental Mobil Terpercaya</title>
+    <title>Kalya Rentcar - Solusi Rental Mobil Terpercaya</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,20 +21,25 @@
             <div class="loading-track">
                 <div class="loading-progress"></div>
             </div>
-            <h2 class="loading-text">KAYLA <span>RENTCAR</span></h2>
+            <h2 class="loading-text">KALYA <span>RENTCAR</span></h2>
             <p class="loading-subtext">Perjalanan Anda dimulai dari sini...</p>
         </div>
     </div>
 
     <!-- NAVBAR -->
     <nav>
-        <div class="logo"><i class="fas fa-car"></i> Kayla <span>Rentcar</span></div>
-        <ul class="nav-links">
+        <div class="logo"><i class="fas fa-car"></i> Kalya <span>Rentcar</span></div>
+        <ul class="nav-links" id="navLinks">
             <li><a href="#home">Beranda</a></li>
             <li><a href="gallery">Gallery</a></li>
             <li><a href="#vehicles">Kendaraan</a></li>
-            <li><a href="#contact">Kontak</a></li>
+            <li><a href="#location">Alamat</a></li>
         </ul>
+        <button class="burger-menu" id="burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
     <!-- HERO SECTION -->
@@ -48,7 +53,7 @@
             <div class="hero-left">
                 <h1 class="hero-title">
                     Sewa Mobil Impian<br>
-                    Anda Bersama <span>Kayla</span><br>
+                    Anda Bersama <span>Kalya</span><br>
                     <span>Rentcar</span>
                 </h1>
                 <p class="hero-description">
@@ -189,6 +194,15 @@
                 <p>Layanan antar jemput bandara dengan mobil nyaman dan driver yang ramah dan tepat waktu.</p>
                 <a href="calculator" class="rental-btn">Pesan Sekarang</a>
             </div>
+
+            <div class="rental-card scroll-fade">
+                <div class="rental-icon">
+                    <i class="fas fa-map-location-dot"></i>
+                </div>
+                <h3>Wisata Tour Dalam & Luar Kota</h3>
+                <p>Paket tour lengkap dengan mobil nyaman dan driver yang mengenal destinasi wisata terbaik.</p>
+                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
+            </div>
         </div>
     </section>
 
@@ -198,12 +212,12 @@
         <div class="vehicles-slider-container">
             <div class="vehicles-slider">
             <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><i class="fas fa-car"></i></div>
+                <div class="vehicle-image"><img src="/img/gambar_wuling_confero.png" alt="Wuling Confero"></div>
                 <div class="vehicle-info">
                     <h4>Honda Civic</h4>
                     <div class="vehicle-specs">
                         <span><i class="fas fa-users"></i> 5 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Manual</span>
+                        <span><i class="fas fa-gear"></i> Matic</span>
                         <span><i class="fas fa-snowflake"></i> AC Dingin</span>
                         <span><i class="fas fa-radio"></i> Audio Premium</span>
                     </div>
@@ -213,12 +227,12 @@
             </div>
 
             <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><i class="fas fa-car"></i></div>
+                <div class="vehicle-image"><img src="/img/gambar_avanza.png" alt="Toyota Avanza"></div>
                 <div class="vehicle-info">
                     <h4>Toyota Avanza</h4>
                     <div class="vehicle-specs">
                         <span><i class="fas fa-users"></i> 7 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Otomatis</span>
+                        <span><i class="fas fa-gear"></i> Matic</span>
                         <span><i class="fas fa-snowflake"></i> AC Dingin</span>
                         <span><i class="fas fa-radio"></i> Audio Premium</span>
                     </div>
@@ -228,12 +242,12 @@
             </div>
 
             <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><i class="fas fa-car"></i></div>
+                <div class="vehicle-image"><img src="/img/gambar_ertiga_hybrid.png" alt="Suzuki Ertiga Hybrid"></div>
                 <div class="vehicle-info">
                     <h4>Toyota Innova</h4>
                     <div class="vehicle-specs">
                         <span><i class="fas fa-users"></i> 8 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Otomatis</span>
+                        <span><i class="fas fa-gear"></i> Matic</span>
                         <span><i class="fas fa-snowflake"></i> AC Dingin</span>
                         <span><i class="fas fa-radio"></i> Audio Premium</span>
                     </div>
@@ -243,12 +257,12 @@
             </div>
 
             <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><i class="fas fa-car"></i></div>
+                <div class="vehicle-image"><img src="/img/gambar_bg.png" alt="BMW X3"></div>
                 <div class="vehicle-info">
                     <h4>BMW X3</h4>
                     <div class="vehicle-specs">
                         <span><i class="fas fa-users"></i> 5 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Otomatis</span>
+                        <span><i class="fas fa-gear"></i> Matic</span>
                         <span><i class="fas fa-snowflake"></i> AC Dingin</span>
                         <span><i class="fas fa-radio"></i> Audio Premium</span>
                     </div>
@@ -323,7 +337,7 @@
                         <div class="address-icon"><i class="fas fa-envelope"></i></div>
                         <div class="address-text">
                             <h4>Email</h4>
-                            <p>info@kaylarentcar.com</p>
+                            <p>info@kalyarentcar.com</p>
                         </div>
                     </div>
                     <div class="address-item">
@@ -346,7 +360,7 @@
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-section">
-                <h5>Tentang Kayla Rentcar</h5>
+                <h5>Tentang Kalya Rentcar</h5>
                 <p>Kami adalah penyedia layanan rental mobil terpercaya dengan pengalaman lebih dari 8 tahun. Komitmen kami adalah memberikan layanan terbaik untuk setiap pelanggan.</p>
             </div>
             <div class="footer-section">
@@ -361,17 +375,18 @@
             <div class="footer-section">
                 <h5>Layanan</h5>
                 <ul>
-                    <li><a href="#">Rental Harian</a></li>
-                    <li><a href="#">Rental Mingguan</a></li>
-                    <li><a href="#">Rental Bulanan</a></li>
-                    <li><a href="#">Dengan Driver</a></li>
+                    <li><a href="#rental-types">Lepas Kunci</a></li>
+                    <li><a href="#rental-types">Mobil + Driver</a></li>
+                    <li><a href="#rental-types">Driver Only</a></li>
+                    <li><a href="#rental-types">Antar Jemput Bandara</a></li>
+                    <li><a href="#rental-types">Wisata Tour Dalam & Luar Kota</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h5>Hubungi Kami</h5>
                 <ul>
                     <li><a href="tel:+62812345678"><i class="fas fa-phone"></i> +62 812-345-678</a></li>
-                    <li><a href="mailto:info@kaylarentcar.com"><i class="fas fa-envelope"></i> info@kaylarentcar.com</a></li>
+                    <li><a href="mailto:info@kalyarentcar.com"><i class="fas fa-envelope"></i> info@kalyarentcar.com</a></li>
                     <li><a href="#"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</a></li>
                     <li style="margin-top: 1rem;">
                         <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
@@ -382,7 +397,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Kayla Rentcar. Semua hak dilindungi. | Design dengan <span style="color: #FFD700;">❤</span> untuk perjalanan Anda.</p>
+            <p>&copy; 2024 Kalya Rentcar. Semua hak dilindungi. | Design dengan <span style="color: #FFD700;">❤</span> untuk perjalanan Anda.</p>
         </div>
     </footer>
 
