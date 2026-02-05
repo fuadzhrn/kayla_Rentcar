@@ -230,10 +230,10 @@ nav {
 .form-group input,
 .form-group select {
     padding: 0.9rem 1.2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 215, 0, 0.3);
     border-radius: 10px;
-    color: #f5f5f5;
+    color: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -242,17 +242,27 @@ nav {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.15);
     border-color: #FFD700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
 .form-group input::placeholder {
-    color: #808080;
+    color: #a0a0a0;
 }
 
 .form-group select {
     cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23FFD700' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.form-group select option {
+    background: #1a1a1a;
+    color: #f5f5f5;
 }
 
 /* Form Row */

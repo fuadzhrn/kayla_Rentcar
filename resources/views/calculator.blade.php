@@ -74,8 +74,6 @@
                                 <option value="">-- Pilih Layanan --</option>
                                 <option value="lepas-kunci">Lepas Kunci</option>
                                 <option value="mobil-driver">Mobil + Driver</option>
-                                <option value="driver-only">Driver Only</option>
-                                <option value="antar-jemput">Antar Jemput Bandara</option>
                             </select>
                         </div>
 
@@ -94,10 +92,9 @@
                             <label for="vehicle">Pilih Kendaraan <span class="required">*</span></label>
                             <select id="vehicle" name="vehicle" required onchange="updateCalculator()">
                                 <option value="">-- Pilih Kendaraan --</option>
-                                <option value="honda-civic" data-price="450000">Honda Civic - Rp 450.000/hari</option>
-                                <option value="toyota-avanza" data-price="550000">Toyota Avanza - Rp 550.000/hari</option>
-                                <option value="toyota-innova" data-price="750000">Toyota Innova - Rp 750.000/hari</option>
-                                <option value="bmw-x3" data-price="1200000">BMW X3 - Rp 1.200.000/hari</option>
+                                @foreach($vehicles as $vehicle)
+                                <option value="{{ $vehicle->id }}" data-price="{{ $vehicle->price_per_day }}">{{ $vehicle->brand }} {{ $vehicle->model }} - Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -118,7 +115,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-submit">
+                    <button type="submit" class="btn-submit" onclick="handleFormSubmit(event)">
                         <i class="fas fa-check-circle"></i> Lanjutkan Pemesanan
                     </button>
                 </form>
@@ -145,23 +142,6 @@
                         <div class="calc-item">
                             <span class="calc-label">Durasi</span>
                             <span class="calc-value" id="calcDays">0 hari</span>
-                        </div>
-
-                        <div class="calc-divider"></div>
-
-                        <div class="calc-item subtotal">
-                            <span class="calc-label">Subtotal</span>
-                            <span class="calc-value" id="calcSubtotal">Rp 0</span>
-                        </div>
-
-                        <div class="calc-item">
-                            <span class="calc-label">Asuransi (10%)</span>
-                            <span class="calc-value" id="calcInsurance">Rp 0</span>
-                        </div>
-
-                        <div class="calc-item">
-                            <span class="calc-label">Admin Fee</span>
-                            <span class="calc-value" id="calcAdmin">Rp 25.000</span>
                         </div>
 
                         <div class="calc-divider"></div>

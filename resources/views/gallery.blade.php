@@ -34,163 +34,30 @@
         <p>Dokumentasi lengkap armada dan layanan kami</p>
     </div>
 
-    <!-- GALLERY FILTERS -->
+    <!-- GALLERY GRID -->
     <div class="gallery-container">
-        <div class="gallery-filters">
-            <button class="filter-btn active" data-filter="all">
-                <i class="fas fa-th"></i> Semua
-            </button>
-        </div>
-
-        <!-- GALLERY GRID -->
         <div class="gallery-grid">
-            <!-- Interior Photos -->
-            <div class="gallery-item" data-category="interior">
-                <img src="https://via.placeholder.com/400x300?text=Interior+1" alt="Interior 1">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
+            @forelse($allGalleries as $gallery)
+                <div class="gallery-item" {{ $gallery->is_featured ? 'data-featured="true"' : '' }}>
+                    <img src="{{ asset('storage/' . $gallery->image_path) }}" alt="{{ $gallery->title }}">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>{{ $gallery->title }}</h3>
+                            @if($gallery->is_featured)
+                                <span class="badge-featured"><i class="fas fa-star"></i> Featured</span>
+                            @endif
+                        </div>
+                        <a href="{{ asset('storage/' . $gallery->image_path) }}" class="gallery-btn" data-lightbox="gallery" data-title="{{ $gallery->title }}">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="gallery-item" data-category="interior">
-                <img src="https://via.placeholder.com/400x300?text=Interior+2" alt="Interior 2">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
+            @empty
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                    <i class="fas fa-image" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
+                    <p style="color: #666; font-size: 18px;">Belum ada foto di galeri</p>
                 </div>
-            </div>
-
-            <div class="gallery-item" data-category="interior">
-                <img src="https://via.placeholder.com/400x300?text=Interior+3" alt="Interior 3">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="interior">
-                <img src="https://via.placeholder.com/400x300?text=Interior+4" alt="Interior 4">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Exterior Photos -->
-            <div class="gallery-item" data-category="exterior">
-                <img src="https://via.placeholder.com/400x300?text=Exterior+1" alt="Exterior 1">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="exterior">
-                <img src="https://via.placeholder.com/400x300?text=Exterior+2" alt="Exterior 2">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="exterior">
-                <img src="https://via.placeholder.com/400x300?text=Exterior+3" alt="Exterior 3">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="exterior">
-                <img src="https://via.placeholder.com/400x300?text=Exterior+4" alt="Exterior 4">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Event Photos -->
-            <div class="gallery-item" data-category="event">
-                <img src="https://via.placeholder.com/400x300?text=Event+1" alt="Event 1">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="event">
-                <img src="https://via.placeholder.com/400x300?text=Event+2" alt="Event 2">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="event">
-                <img src="https://via.placeholder.com/400x300?text=Event+3" alt="Event 3">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="event">
-                <img src="https://via.placeholder.com/400x300?text=Event+4" alt="Event 4">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Fasilitas Photos -->
-            <div class="gallery-item" data-category="fasilitas">
-                <img src="https://via.placeholder.com/400x300?text=Fasilitas+1" alt="Fasilitas 1">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="fasilitas">
-                <img src="https://via.placeholder.com/400x300?text=Fasilitas+2" alt="Fasilitas 2">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="fasilitas">
-                <img src="https://via.placeholder.com/400x300?text=Fasilitas+3" alt="Fasilitas 3">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-category="fasilitas">
-                <img src="https://via.placeholder.com/400x300?text=Fasilitas+4" alt="Fasilitas 4">
-                <div class="gallery-overlay">
-                    <button class="view-btn" onclick="openLightbox(this)">
-                        <i class="fas fa-search-plus"></i>
-                    </button>
-                </div>
-            </div>
+            @endforelse
         </div>
 
         <!-- PAGINATION CONTROLS -->

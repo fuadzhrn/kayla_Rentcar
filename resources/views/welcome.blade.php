@@ -34,6 +34,7 @@
             <li><a href="gallery">Gallery</a></li>
             <li><a href="#vehicles">Kendaraan</a></li>
             <li><a href="#location">Alamat</a></li>
+            <li><a href="/login" style="color: #FFD700; font-weight: 600;"><i class="fas fa-lock"></i> Admin</a></li>
         </ul>
         <button class="burger-menu" id="burgerMenu">
             <span></span>
@@ -159,50 +160,20 @@
     <section id="rental-types" class="rental-types">
         <h2 class="section-title">Tipe <span>Sewa</span></h2>
         <div class="rental-types-grid">
-            <div class="rental-card scroll-fade">
+            @forelse($rentalTypes as $type)
+            <div class="rental-card scroll-fade" data-rental-type="{{ strtolower(str_replace([' ', '&'], ['-', 'dan'], $type->name)) }}">
                 <div class="rental-icon">
-                    <i class="fas fa-key"></i>
+                    <i class="fas {{ $type->icon }}"></i>
                 </div>
-                <h3>Lepas Kunci</h3>
-                <p>Sewa mobil tanpa driver. Anda bebas mengendarai sendiri sesuai kenyamanan Anda.</p>
-                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
+                <h3>{{ $type->name }}</h3>
+                <p>{{ $type->description }}</p>
+                <button class="rental-btn" onclick="handleRentalTypeClick('{{ strtolower(str_replace([' ', '&'], ['-', 'dan'], $type->name)) }}', '{{ $type->name }}')">Pesan Sekarang</button>
             </div>
-
-            <div class="rental-card scroll-fade">
-                <div class="rental-icon">
-                    <i class="fas fa-car-side"></i>
-                </div>
-                <h3>Mobil + Driver</h3>
-                <p>Sewa mobil lengkap dengan driver profesional dan berpengalaman untuk perjalanan Anda.</p>
-                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
+            @empty
+            <div class="alert alert-info" style="grid-column: 1 / -1;">
+                <i class="fas fa-info-circle"></i> Jenis layanan tidak tersedia
             </div>
-
-            <div class="rental-card scroll-fade">
-                <div class="rental-icon">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-                <h3>Driver Only</h3>
-                <p>Butuh driver untuk mobil pribadi Anda? Kami sediakan driver profesional siap melayani.</p>
-                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
-            </div>
-
-            <div class="rental-card scroll-fade">
-                <div class="rental-icon">
-                    <i class="fas fa-plane"></i>
-                </div>
-                <h3>Antar Jemput Bandara</h3>
-                <p>Layanan antar jemput bandara dengan mobil nyaman dan driver yang ramah dan tepat waktu.</p>
-                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
-            </div>
-
-            <div class="rental-card scroll-fade">
-                <div class="rental-icon">
-                    <i class="fas fa-map-location-dot"></i>
-                </div>
-                <h3>Wisata Tour Dalam & Luar Kota</h3>
-                <p>Paket tour lengkap dengan mobil nyaman dan driver yang mengenal destinasi wisata terbaik.</p>
-                <a href="calculator" class="rental-btn">Pesan Sekarang</a>
-            </div>
+            @endforelse
         </div>
     </section>
 
@@ -211,65 +182,34 @@
         <h2 class="section-title">Armada <span>Kendaraan</span></h2>
         <div class="vehicles-slider-container">
             <div class="vehicles-slider">
+            @forelse($vehicles as $vehicle)
             <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><img src="/img/gambar_wuling_confero.png" alt="Wuling Confero"></div>
+                <div class="vehicle-image"><img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}"></div>
                 <div class="vehicle-info">
-                    <h4>Honda Civic</h4>
+                    <h4>{{ $vehicle->brand }} {{ $vehicle->model }}</h4>
                     <div class="vehicle-specs">
-                        <span><i class="fas fa-users"></i> 5 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Matic</span>
+                        <span><i class="fas fa-users"></i> {{ $vehicle->seat_capacity }} Penumpang</span>
+                        <span><i class="fas fa-gear"></i> {{ ucfirst($vehicle->transmission) }}</span>
+                        @if($vehicle->fuel_type)
+                        <span><i class="fas fa-gas-pump"></i> {{ ucfirst($vehicle->fuel_type) }}</span>
+                        @endif
                         <span><i class="fas fa-snowflake"></i> AC Dingin</span>
-                        <span><i class="fas fa-radio"></i> Audio Premium</span>
                     </div>
-                    <div class="vehicle-price">Rp 450.000/hari</div>
-                    <a href="calculator?vehicle=Honda Civic" class="vehicle-btn">Pesan Sekarang</a>
+                    <div class="vehicle-price">Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</div>
+                    <a href="calculator?vehicle={{ urlencode($vehicle->brand . ' ' . $vehicle->model) }}" class="vehicle-btn">Pesan Sekarang</a>
                 </div>
             </div>
-
+            @empty
             <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><img src="/img/gambar_avanza.png" alt="Toyota Avanza"></div>
+                <div class="vehicle-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-car" style="font-size: 60px; color: #ccc;"></i>
+                </div>
                 <div class="vehicle-info">
-                    <h4>Toyota Avanza</h4>
-                    <div class="vehicle-specs">
-                        <span><i class="fas fa-users"></i> 7 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Matic</span>
-                        <span><i class="fas fa-snowflake"></i> AC Dingin</span>
-                        <span><i class="fas fa-radio"></i> Audio Premium</span>
-                    </div>
-                    <div class="vehicle-price">Rp 550.000/hari</div>
-                    <a href="calculator?vehicle=Toyota Avanza" class="vehicle-btn">Pesan Sekarang</a>
+                    <h4>Tidak Ada Kendaraan</h4>
+                    <p style="color: #999; font-size: 14px;">Daftar kendaraan sedang tidak tersedia</p>
                 </div>
             </div>
-
-            <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><img src="/img/gambar_ertiga_hybrid.png" alt="Suzuki Ertiga Hybrid"></div>
-                <div class="vehicle-info">
-                    <h4>Toyota Innova</h4>
-                    <div class="vehicle-specs">
-                        <span><i class="fas fa-users"></i> 8 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Matic</span>
-                        <span><i class="fas fa-snowflake"></i> AC Dingin</span>
-                        <span><i class="fas fa-radio"></i> Audio Premium</span>
-                    </div>
-                    <div class="vehicle-price">Rp 750.000/hari</div>
-                    <a href="calculator?vehicle=Toyota Innova" class="vehicle-btn">Pesan Sekarang</a>
-                </div>
-            </div>
-
-            <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><img src="/img/gambar_bg.png" alt="BMW X3"></div>
-                <div class="vehicle-info">
-                    <h4>BMW X3</h4>
-                    <div class="vehicle-specs">
-                        <span><i class="fas fa-users"></i> 5 Penumpang</span>
-                        <span><i class="fas fa-gear"></i> Matic</span>
-                        <span><i class="fas fa-snowflake"></i> AC Dingin</span>
-                        <span><i class="fas fa-radio"></i> Audio Premium</span>
-                    </div>
-                    <div class="vehicle-price">Rp 1.200.000/hari</div>
-                    <a href="calculator?vehicle=BMW X3" class="vehicle-btn">Pesan Sekarang</a>
-                </div>
-            </div>
+            @endforelse
         </div>
         <div class="slider-controls">
             <button class="slider-btn slider-prev" onclick="prevVehicle()">
@@ -402,10 +342,11 @@
     </footer>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="https://wa.me/628123456789" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami">
+    <a href="https://wa.me/6282156970588?text=Halo%20Kalya%20Rentcar%2C%20saya%20ingin%20memesan%20rental%20mobil.%20Mohon%20informasi%20mengenai%20ketersediaan%20kendaraan%20dan%20harga%20terbaru.%20Terima%20kasih." class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami di WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script src="/js/landing.js"></script>
+    <script src="/js/rental-types-handler.js"></script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+/* Auth Pages Custom Styles */
+
+/* Force override Bootstrap form-control styling */
+input.form-control,
+textarea.form-control,
+select.form-control {
+    background-color: rgba(26, 26, 26, 0.7) !important;
+    border-color: rgba(255, 215, 0, 0.2) !important;
+    color: #fff !important;
+}
+
+input.form-control::placeholder,
+textarea.form-control::placeholder,
+select.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+    background-color: rgba(26, 26, 26, 0.8) !important;
+    border-color: #FFD700 !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1) !important;
+}
+
+/* Form card backgrounds */
+.login-form-card,
+.register-card {
+    background-color: rgba(26, 26, 26, 0.85) !important;
+}

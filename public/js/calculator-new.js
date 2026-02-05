@@ -34,6 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('checkin').setAttribute('min', today);
     document.getElementById('checkout').setAttribute('min', today);
     
+    // Check if vehicle is passed via URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const vehicleParam = urlParams.get('vehicle');
+    
+    if (vehicleParam) {
+        // Find and select the vehicle option that matches
+        const vehicleSelect = document.getElementById('vehicle');
+        for (let i = 0; i < vehicleSelect.options.length; i++) {
+            if (vehicleSelect.options[i].text.includes(vehicleParam)) {
+                vehicleSelect.value = vehicleSelect.options[i].value;
+                break;
+            }
+        }
+    }
+    
     // Add event listeners
     document.getElementById('vehicle').addEventListener('change', updateCalculator);
     document.getElementById('checkin').addEventListener('change', calculateDays);
@@ -95,16 +110,10 @@ function updateCalculator() {
     document.getElementById('calcPrice').textContent = formatCurrency(pricePerDay);
     document.getElementById('calcDays').textContent = days + ' hari';
     
-    // Calculate values
-    const subtotal = pricePerDay * days;
-    const insurance = Math.ceil(subtotal * 0.1); // 10% insurance
-    const adminFee = 25000;
-    const total = subtotal + insurance + adminFee;
+    // Calculate total
+    const total = pricePerDay * days;
     
-    // Update breakdown
-    document.getElementById('calcSubtotal').textContent = formatCurrency(subtotal);
-    document.getElementById('calcInsurance').textContent = formatCurrency(insurance);
-    document.getElementById('calcAdmin').textContent = formatCurrency(adminFee);
+    // Update display
     document.getElementById('calcTotal').textContent = formatCurrency(total);
 }
 
@@ -119,47 +128,99 @@ function handleFormSubmit(e) {
     e.preventDefault();
     
     // Get form values
-    const nama = document.getElementById('nama').value;
-    const whatsapp = document.getElementById('whatsapp').value;
-    const email = document.getElementById('email').value;
-    const service = document.getElementById('service').value;
-    const vehicle = document.getElementById('vehicle').value;
+    const nama = document.getElementById('nama').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const serviceCode = document.getElementById('service').value;
+    const serviceLabel = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
+    const vehicleSelect = document.getElementById('vehicle');
+    const vehicleLabel = vehicleSelect.options[vehicleSelect.selectedIndex].text;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     const days = document.getElementById('days').value;
     
     // Validate required fields
-    if (!nama || !whatsapp || !service || !vehicle || !checkin || !checkout) {
-        alert('Mohon lengkapi semua data yang required');
+    if (!nama) {
+        alert('⚠️ Nama lengkap harus diisi!');
+        document.getElementById('nama').focus();
+        return;
+    }
+    
+    if (!whatsapp) {
+        alert('⚠️ Nomor WhatsApp harus diisi!');
+        document.getElementById('whatsapp').focus();
+        return;
+    }
+    
+    if (!serviceCode) {
+        alert('⚠️ Jenis layanan harus dipilih!');
+        document.getElementById('service').focus();
+        return;
+    }
+    
+    if (!vehicleSelect.value) {
+        alert('⚠️ Kendaraan harus dipilih!');
+        document.getElementById('vehicle').focus();
+        return;
+    }
+    
+    if (!checkin) {
+        alert('⚠️ Tanggal sewa harus dipilih!');
+        document.getElementById('checkin').focus();
+        return;
+    }
+    
+    if (!checkout) {
+        alert('⚠️ Tanggal kembali harus dipilih!');
+        document.getElementById('checkout').focus();
         return;
     }
     
     // Get calculator values
-    const total = document.getElementById('calcTotal').textContent;
+    const totalText = document.getElementById('calcTotal').textContent;
+    const pricePerDay = document.getElementById('calcPrice').textContent;
     
-    // Build WhatsApp message
+    // Map service code to friendly name
+    const serviceNames = {
+        'lepas-kunci': 'Lepas Kunci (Sewa tanpa pengemudi)',
+        'mobil-driver': 'Mobil + Driver Profesional'
+    };
+    
+    const serviceName = serviceNames[serviceCode] || serviceCode;
+    
+    // Build WhatsApp message with better formatting
     const message = `
-*PERMINTAAN SEWA MOBIL - KALYA RENTCAR*
+════════════════════════════════════════
+     FORMULIR SEWA MOBIL - KALYA RENTCAR
+════════════════════════════════════════
 
-*DATA PEMESAN:*
-Nama: ${nama}
-WhatsApp: ${whatsapp}
-Email: ${email || '-'}
+📋 DATA PEMESAN
+Nama Lengkap: ${nama}
+No WhatsApp: ${whatsapp}
+Email: ${email ? email : '(tidak diisi)'}
 
-*DETAIL SEWA:*
-Layanan: ${service}
-Kendaraan: ${document.getElementById('vehicle').options[document.getElementById('vehicle').selectedIndex].text}
-Tanggal Sewa: ${formatDate(checkin)}
+🚗 DETAIL PEMESANAN
+Jenis Layanan: ${serviceName}
+Kendaraan: ${vehicleLabel}
+Harga Per Hari: ${pricePerDay}
+Tanggal Mulai: ${formatDate(checkin)}
 Tanggal Kembali: ${formatDate(checkout)}
-Durasi: ${days} hari
+Durasi Sewa: ${days} hari
 
-*TOTAL BIAYA:* ${total}
+💵 RINGKASAN BIAYA
+Total Biaya: ${totalText}
 
-Mohon konfirmasi ketersediaan kendaraan dan proses lebih lanjut.
+════════════════════════════════════════
+
+Terima kasih telah memilih Kalya Rentcar!
+Kami akan segera mengkonfirmasi ketersediaan kendaraan dan menghubungi Anda.
+
+Salam,
+Admin Kalya Rentcar
 `.trim();
     
     // Get admin WhatsApp number
-    const adminNumber = '628123456789'; // Change this to actual admin number
+    const adminNumber = '6282156970588'; // Nomor Kalya Rentcar
     
     // Create WhatsApp link
     const whatsappLink = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
