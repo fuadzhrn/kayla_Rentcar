@@ -1142,10 +1142,6 @@ nav {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.location-map iframe {
-    border-radius: 12px;
-}
-
 /* FOOTER */
 footer {
     background: rgba(0, 0, 0, 0.8);

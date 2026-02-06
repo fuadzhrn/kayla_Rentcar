@@ -591,7 +591,6 @@
                                 required
                                 autocomplete="name"
                             >
-                            <small class="text-muted">Hanya huruf, spasi, tanda kutip dan tanda hubung diizinkan</small>
                             @error('name')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
@@ -645,9 +644,6 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <small class="text-muted">
-                                Minimal 8 karakter, harus mengandung: huruf besar (A-Z), huruf kecil (a-z), angka (0-9), simbol (!@#$%^&*)
-                            </small>
                             @error('password')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
@@ -693,7 +689,7 @@
 
                     <!-- Login Link -->
                     <div class="register-link">
-                        Sudah punya akun? <a href="{{ route('auth.showLogin') }}">Masuk di sini</a>
+                        Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a>
                     </div>
 
                     <!-- Back to Home -->

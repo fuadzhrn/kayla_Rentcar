@@ -34,7 +34,7 @@ class VehicleController extends Controller
             'description' => 'nullable|string',
             'has_ac' => 'nullable|boolean',
             'is_available' => 'nullable|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Convert checkbox values properly
@@ -84,7 +84,7 @@ class VehicleController extends Controller
             'description' => 'nullable|string',
             'has_ac' => 'nullable|boolean',
             'is_available' => 'nullable|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Convert checkbox values properly

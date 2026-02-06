@@ -23,6 +23,12 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register.post');
+
+// OTP Verification Routes
+Route::get('/register/verify-otp', [AuthController::class, 'showVerifyOtp'])->name('auth.showVerifyOtp');
+Route::post('/register/verify-otp', [AuthController::class, 'verifyOtp'])->name('auth.verifyOtp');
+Route::get('/register/resend-otp', [AuthController::class, 'resendOtp'])->name('auth.resendOtp');
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Admin Routes (Protected) - Must be logged in

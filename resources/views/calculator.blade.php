@@ -48,17 +48,41 @@
                         
                         <div class="form-group">
                             <label for="nama">Nama Lengkap <span class="required">*</span></label>
-                            <input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso" required>
+                            <input 
+                                type="text" 
+                                id="nama" 
+                                name="nama" 
+                                placeholder="Contoh: Budi Santoso" 
+                                maxlength="100"
+                                pattern="^[a-zA-Z\s\'-]+$"
+                                title="Nama hanya boleh mengandung huruf, spasi, tanda kutip, dan tanda hubung"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
                             <label for="whatsapp">Nomor WhatsApp <span class="required">*</span></label>
-                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 081234567890" required>
+                            <input 
+                                type="tel" 
+                                id="whatsapp" 
+                                name="whatsapp" 
+                                placeholder="Contoh: 081234567890"
+                                pattern="^(\+62|0)[0-9]{9,12}$"
+                                maxlength="15"
+                                title="Nomor WhatsApp harus valid (misal: 081234567890 atau +6281234567890)"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email <span class="optional">(Opsional)</span></label>
-                            <input type="email" id="email" name="email" placeholder="Contoh: email@gmail.com">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Contoh: email@gmail.com"
+                                maxlength="255"
+                            >
                         </div>
                     </div>
 

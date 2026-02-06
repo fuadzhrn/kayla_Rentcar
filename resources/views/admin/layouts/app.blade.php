@@ -235,7 +235,7 @@
 
                         <!-- Back to Home -->
                         <li class="nav-item">
-                            <a href="/" class="nav-link" target="_blank">
+                            <a href="/" class="nav-link">
                                 <i class="nav-icon fas fa-arrow-left"></i>
                                 <p>Kembali ke Beranda</p>
                             </a>

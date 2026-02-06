@@ -183,6 +183,55 @@ function handleFormSubmit(e) {
     const checkout = document.getElementById('checkout').value;
     const days = document.getElementById('days').value;
     
+    // ===== SECURITY VALIDATION =====
+    // Check for script injection in nama
+    if (containsScriptInjection(nama)) {
+        alert('⚠️ Nama mengandung karakter yang tidak diizinkan!');
+        document.getElementById('nama').focus();
+        return;
+    }
+    
+    // Check for invalid characters in nama
+    const namaRegex = /^[a-zA-Z\s\'-]+$/;
+    if (!namaRegex.test(nama)) {
+        alert('⚠️ Nama hanya boleh mengandung huruf, spasi, tanda kutip, dan tanda hubung!');
+        document.getElementById('nama').focus();
+        return;
+    }
+    
+    // Validate WhatsApp format
+    const whatsappRegex = /^(\+62|0)[0-9]{9,12}$/;
+    if (!whatsappRegex.test(whatsapp)) {
+        alert('⚠️ Nomor WhatsApp tidak valid! Gunakan format: 081234567890 atau +6281234567890');
+        document.getElementById('whatsapp').focus();
+        return;
+    }
+    
+    // Check for script injection in whatsapp
+    if (containsScriptInjection(whatsapp)) {
+        alert('⚠️ Nomor WhatsApp mengandung karakter yang tidak diizinkan!');
+        document.getElementById('whatsapp').focus();
+        return;
+    }
+    
+    // Validate email if provided
+    if (email) {
+        if (containsScriptInjection(email)) {
+            alert('⚠️ Email mengandung karakter yang tidak diizinkan!');
+            document.getElementById('email').focus();
+            return;
+        }
+        
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            alert('⚠️ Format email tidak valid!');
+            document.getElementById('email').focus();
+            return;
+        }
+    }
+    
+    // ===== STANDARD VALIDATION =====
+    
     // Get destination if applicable
     let destinationLabel = '';
     let destinationInfo = '';
@@ -296,4 +345,41 @@ Admin Kalya Rentcar
 function formatDate(dateString) {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('id-ID', options);
+}
+
+// ========== SECURITY HELPER FUNCTIONS ==========
+/**
+ * Deteksi script injection attempt dalam input
+ */
+function containsScriptInjection(input) {
+    const maliciousPatterns = [
+        /<script[^>]*>.*?<\/script>/gi,  // Script tags
+        /on\w+\s*=/gi,                   // Event handlers (onclick, onerror, etc)
+        /javascript:/gi,                 // Javascript protocol
+        /<iframe[^>]*>/gi,               // Iframe tags
+        /<object[^>]*>/gi,               // Object tags
+        /<embed[^>]*>/gi,                // Embed tags
+        /union.*select/gi,               // SQL injection
+        /insert.*into/gi,                // SQL injection
+        /delete.*from/gi,                // SQL injection
+        /drop.*table/gi,                 // SQL injection
+        /update.*set/gi,                 // SQL injection
+        /select.*from/gi,                // SQL injection
+    ];
+
+    for (let pattern of maliciousPatterns) {
+        if (pattern.test(input)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Sanitasi input dengan menghapus tag HTML dan script
+ */
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
 }

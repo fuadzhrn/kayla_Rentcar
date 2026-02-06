@@ -272,28 +272,31 @@
                         <div class="address-icon"><i class="fas fa-phone"></i></div>
                         <div class="address-text">
                             <h4>Telepon</h4>
-                            <p>+62 21-5555-1234</p>
+                            <p>085888212282</p>
                         </div>
                     </div>
                     <div class="address-item">
                         <div class="address-icon"><i class="fas fa-envelope"></i></div>
                         <div class="address-text">
                             <h4>Email</h4>
-                            <p>info@kalyarentcar.com</p>
+                            <p>Kelikkanopi2@gmail.com</p>
                         </div>
                     </div>
                     <div class="address-item">
                         <div class="address-icon"><i class="fas fa-clock"></i></div>
                         <div class="address-text">
                             <h4>Jam Operasional</h4>
-                            <p>Senin - Minggu: 07:00 - 22:00 WIB</p>
+                            <p>Senin - Minggu: 07:00 - 24:00 WIB</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="location-map scroll-fade">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322811!2d106.82969961177974!3d-6.200000261819916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5f3f3f3f3f3%3A0x3f3f3f3f3f3f3f3f!2sJl.%20Sudirman%2C%20Jakarta%20Pusat!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="location-map scroll-fade" onclick="window.open('https://www.google.com/maps/search/KALYA+RENTCAR', '_blank')" style="cursor: pointer; position: relative;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253825.47352509934!2d106.56154632568361!3d-6.260697372951346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f39efbdb8087%3A0x60460641e278555d!2sKALYA%20RENTCAR!5e0!3m2!1sid!2sid!4v1770415521235!5m2!1sid!2sid" style="width: 100%; height: 450px; border: 0; border-radius: 12px; pointer-events: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.9); color: #1a1a1a; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.3s ease;">
+                    <i class="fas fa-external-link-alt"></i> Buka di Google Maps
+                </div>
             </div>
         </div>
     </section>
@@ -327,8 +330,8 @@
             <div class="footer-section">
                 <h5>Hubungi Kami</h5>
                 <ul>
-                    <li><a href="tel:+62812345678"><i class="fas fa-phone"></i> +62 812-345-678</a></li>
-                    <li><a href="mailto:info@kalyarentcar.com"><i class="fas fa-envelope"></i> info@kalyarentcar.com</a></li>
+                    <li><a href="tel:085888212282"><i class="fas fa-phone"></i> 085888212282</a></li>
+                    <li><a href="mailto:Kelikkanopi2@gmail.com"><i class="fas fa-envelope"></i> Kelikkanopi2@gmail.com</a></li>
                     <li><a href="#"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</a></li>
                     <li style="margin-top: 1rem;">
                         <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
