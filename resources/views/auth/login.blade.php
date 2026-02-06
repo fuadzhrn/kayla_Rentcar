@@ -590,6 +590,13 @@
                         </div>
                     @endif
 
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            <i class="fas fa-lock"></i>
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     @if (session('success'))
                         <div class="alert alert-success">
                             <i class="fas fa-check-circle"></i>
@@ -613,7 +620,9 @@
                                 name="email"
                                 placeholder="admin@kalyarentcar.com"
                                 value="{{ old('email') }}"
+                                maxlength="255"
                                 required
+                                autocomplete="email"
                             >
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -632,7 +641,9 @@
                                     id="password" 
                                     name="password"
                                     placeholder="••••••••"
+                                    maxlength="255"
                                     required
+                                    autocomplete="current-password"
                                 >
                                 <button 
                                     type="button" 

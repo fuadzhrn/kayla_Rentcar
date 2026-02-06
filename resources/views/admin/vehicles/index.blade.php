@@ -30,10 +30,10 @@
                                     <th>No</th>
                                     <th>Foto</th>
                                     <th>Nama Kendaraan</th>
-                                    <th>Brand</th>
-                                    <th>Tipe</th>
-                                    <th>Harga/Hari</th>
                                     <th>Transmisi</th>
+                                    <th>Penumpang</th>
+                                    <th>Harga/Hari</th>
+                                    <th>Bahan Bakar</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -54,12 +54,12 @@
                                         <td>
                                             <strong>{{ $vehicle->name }}</strong>
                                         </td>
-                                        <td>{{ $vehicle->brand }}</td>
-                                        <td><span class="badge badge-info">{{ $vehicle->vehicle_type }}</span></td>
+                                        <td>{{ $vehicle->transmission }}</td>
+                                        <td><span class="badge badge-primary">{{ $vehicle->seat_capacity }} Orang</span></td>
                                         <td>
                                             <strong>Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}</strong>
                                         </td>
-                                        <td>{{ $vehicle->transmission }}</td>
+                                        <td>{{ $vehicle->fuel_type }}</td>
                                         <td>
                                             @if($vehicle->is_available)
                                                 <span class="badge badge-success">Tersedia</span>

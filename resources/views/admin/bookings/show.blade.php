@@ -78,12 +78,8 @@
                         <h5>{{ $booking->vehicle->name ?? 'N/A' }}</h5>
                         <table class="table table-sm">
                             <tr>
-                                <td class="font-weight-bold" width="30%">Brand</td>
-                                <td>{{ $booking->vehicle->brand ?? 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Tipe</td>
-                                <td>{{ $booking->vehicle->vehicle_type ?? 'N/A' }}</td>
+                                <td class="font-weight-bold" width="30%">Penumpang</td>
+                                <td>{{ $booking->vehicle->seat_capacity ?? 'N/A' }} Orang</td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Transmisi</td>

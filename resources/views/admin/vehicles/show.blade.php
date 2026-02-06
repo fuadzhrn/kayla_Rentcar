@@ -17,7 +17,6 @@
                     </div>
                 @endif
                 <h5>{{ $vehicle->name }}</h5>
-                <p class="text-muted">{{ $vehicle->brand }} - {{ $vehicle->model }}</p>
                 <div class="badge badge-lg" style="background-color: #FFD700; color: #1a1a1a;">
                     <h4 class="mb-0">Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/Hari</h4>
                 </div>
@@ -70,40 +69,30 @@
                     <div class="col-md-6">
                         <table class="table table-sm">
                             <tr>
-                                <td class="font-weight-bold">Tahun</td>
-                                <td>{{ $vehicle->year }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Tipe Kendaraan</td>
-                                <td>{{ $vehicle->vehicle_type }}</td>
-                            </tr>
-                            <tr>
                                 <td class="font-weight-bold">Transmisi</td>
                                 <td>{{ $vehicle->transmission }}</td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Engine CC</td>
-                                <td>{{ $vehicle->engine_cc }} cc</td>
+                                <td class="font-weight-bold">Kapasitas Penumpang</td>
+                                <td>{{ $vehicle->seat_capacity }} Orang</td>
                             </tr>
                         </table>
                     </div>
                     <div class="col-md-6">
                         <table class="table table-sm">
                             <tr>
-                                <td class="font-weight-bold">Tipe Bahan Bakar</td>
+                                <td class="font-weight-bold">Jenis Bahan Bakar</td>
                                 <td>{{ $vehicle->fuel_type }}</td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Kapasitas Penumpang</td>
-                                <td>{{ $vehicle->seat_capacity }} Orang</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Dibuat</td>
-                                <td>{{ $vehicle->created_at->format('d M Y') }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Diupdate</td>
-                                <td>{{ $vehicle->updated_at->format('d M Y') }}</td>
+                                <td class="font-weight-bold">AC Dingin</td>
+                                <td>
+                                    @if($vehicle->has_ac)
+                                        <span class="badge badge-success"><i class="fas fa-fan"></i> Ada</span>
+                                    @else
+                                        <span class="badge badge-danger"><i class="fas fa-ban"></i> Tidak Ada</span>
+                                    @endif
+                                </td>
                             </tr>
                         </table>
                     </div>

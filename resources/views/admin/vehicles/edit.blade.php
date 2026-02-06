@@ -72,57 +72,22 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="brand">Brand/Merek <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" value="{{ old('brand', $vehicle->brand) }}" required>
-                                @error('brand')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="model">Model <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('model') is-invalid @enderror" id="model" name="model" value="{{ old('model', $vehicle->model) }}" required>
-                                @error('model')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="year">Tahun Produksi <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control @error('year') is-invalid @enderror" id="year" name="year" value="{{ old('year', $vehicle->year) }}" min="2000" required>
-                                @error('year')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="vehicle_type">Tipe/Kategori Kendaraan <span class="text-danger">*</span></label>
-                                <select class="form-control @error('vehicle_type') is-invalid @enderror" id="vehicle_type" name="vehicle_type" required>
-                                    <option value="Compact" {{ old('vehicle_type', $vehicle->vehicle_type) == 'Compact' ? 'selected' : '' }}>Compact Car</option>
-                                    <option value="Sedan" {{ old('vehicle_type', $vehicle->vehicle_type) == 'Sedan' ? 'selected' : '' }}>Sedan</option>
-                                    <option value="SUV" {{ old('vehicle_type', $vehicle->vehicle_type) == 'SUV' ? 'selected' : '' }}>SUV</option>
-                                    <option value="MPV" {{ old('vehicle_type', $vehicle->vehicle_type) == 'MPV' ? 'selected' : '' }}>MPV (Multi Purpose Vehicle)</option>
-                                    <option value="Truck" {{ old('vehicle_type', $vehicle->vehicle_type) == 'Truck' ? 'selected' : '' }}>Truck</option>
-                                </select>
-                                @error('vehicle_type')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
                                 <label for="transmission">Transmisi <span class="text-danger">*</span></label>
                                 <select class="form-control @error('transmission') is-invalid @enderror" id="transmission" name="transmission" required>
                                     <option value="Manual" {{ old('transmission', $vehicle->transmission) == 'Manual' ? 'selected' : '' }}>Manual</option>
                                     <option value="Automatic" {{ old('transmission', $vehicle->transmission) == 'Automatic' ? 'selected' : '' }}>Automatic</option>
                                 </select>
                                 @error('transmission')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="seat_capacity">Kapasitas Penumpang <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control @error('seat_capacity') is-invalid @enderror" id="seat_capacity" name="seat_capacity" value="{{ old('seat_capacity', $vehicle->seat_capacity) }}" min="1" max="10" required>
+                                <small class="form-text text-muted">Jumlah orang yang dapat ditampung termasuk driver</small>
+                                @error('seat_capacity')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -162,15 +127,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="seat_capacity">Kapasitas Penumpang <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control @error('seat_capacity') is-invalid @enderror" id="seat_capacity" name="seat_capacity" value="{{ old('seat_capacity', $vehicle->seat_capacity) }}" min="1" max="10" required>
-                        <small class="form-text text-muted">Jumlah orang yang dapat ditampung termasuk driver</small>
-                        @error('seat_capacity')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
                     </div>
 
                     <!-- BAGIAN 3: HARGA -->
@@ -231,6 +187,16 @@
                         @error('description')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fasilitas Kendaraan</label>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="has_ac" name="has_ac" value="1" {{ old('has_ac', $vehicle->has_ac) ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="has_ac">
+                                <i class="fas fa-fan" style="color: #FFD700;"></i> Kendaraan memiliki AC dingin
+                            </label>
+                        </div>
                     </div>
 
                     <div class="form-group">

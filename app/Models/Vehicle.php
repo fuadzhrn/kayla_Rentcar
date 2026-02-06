@@ -23,6 +23,7 @@ class Vehicle extends Model
         'description',
         'image',
         'is_available',
+        'has_ac',
     ];
 
     public function images()

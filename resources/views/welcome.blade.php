@@ -186,17 +186,19 @@
             <div class="vehicle-card scroll-fade">
                 <div class="vehicle-image"><img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}"></div>
                 <div class="vehicle-info">
-                    <h4>{{ $vehicle->brand }} {{ $vehicle->model }}</h4>
+                    <h4>{{ $vehicle->name }}</h4>
                     <div class="vehicle-specs">
                         <span><i class="fas fa-users"></i> {{ $vehicle->seat_capacity }} Penumpang</span>
                         <span><i class="fas fa-gear"></i> {{ ucfirst($vehicle->transmission) }}</span>
                         @if($vehicle->fuel_type)
                         <span><i class="fas fa-gas-pump"></i> {{ ucfirst($vehicle->fuel_type) }}</span>
                         @endif
-                        <span><i class="fas fa-snowflake"></i> AC Dingin</span>
+                        @if($vehicle->has_ac)
+                        <span><i class="fas fa-fan"></i> AC Dingin</span>
+                        @endif
                     </div>
                     <div class="vehicle-price">Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</div>
-                    <a href="calculator?vehicle={{ urlencode($vehicle->brand . ' ' . $vehicle->model) }}" class="vehicle-btn">Pesan Sekarang</a>
+                    <a href="calculator?vehicle={{ urlencode($vehicle->name) }}" class="vehicle-btn">Pesan Sekarang</a>
                 </div>
             </div>
             @empty

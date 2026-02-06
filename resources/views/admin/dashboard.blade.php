@@ -27,7 +27,7 @@
         <div class="small-box bg-success">
             <div class="inner">
                 <h3>{{ $totalImages ?? 0 }}</h3>
-                <p>Total Foto Kendaraan</p>
+                <p>Total Foto Galeri</p>
             </div>
             <div class="icon">
                 <i class="fas fa-images"></i>
@@ -38,17 +38,17 @@
         </div>
     </div>
 
-    <!-- Total Features -->
+    <!-- Total Rental Types -->
     <div class="col-lg-3 col-6">
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>{{ $totalFeatures ?? 0 }}</h3>
-                <p>Total Fitur Kendaraan</p>
+                <h3>{{ $totalRentalTypes ?? 0 }}</h3>
+                <p>Total Jenis Layanan</p>
             </div>
             <div class="icon">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-layer-group"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{ route('admin.rental-types.index') }}" class="small-box-footer">
                 Lihat Detail <i class="fas fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -70,21 +70,6 @@
         </div>
     </div>
 
-    <!-- Total Gallery Photos -->
-    <div class="col-lg-3 col-6">
-        <div class="small-box" style="background-color: #FFD700; color: #000;">
-            <div class="inner">
-                <h3>{{ $totalGalleryPhotos ?? 0 }}</h3>
-                <p>Foto Galeri</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-image"></i>
-            </div>
-            <a href="{{ route('admin.gallery.index') }}" class="small-box-footer" style="background-color: rgba(0,0,0,0.2);">
-                Lihat Detail <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
 </div>
 
 <div class="row">
@@ -105,7 +90,7 @@
                         <thead>
                             <tr>
                                 <th>Nama</th>
-                                <th>Brand</th>
+                                <th>Transmisi</th>
                                 <th>Harga/Hari</th>
                                 <th>Status</th>
                             </tr>
@@ -114,7 +99,7 @@
                             @forelse($recentVehicles ?? [] as $vehicle)
                                 <tr>
                                     <td>{{ $vehicle->name }}</td>
-                                    <td>{{ $vehicle->brand }}</td>
+                                    <td>{{ $vehicle->transmission }}</td>
                                     <td>Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}</td>
                                     <td>
                                         @if($vehicle->is_available)

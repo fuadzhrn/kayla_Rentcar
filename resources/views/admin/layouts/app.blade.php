@@ -215,6 +215,14 @@
                             </a>
                         </li>
 
+                        <!-- Destinations Management -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.destinations.index') }}" class="nav-link @if(request()->routeIs('admin.destinations.*')) active @endif">
+                                <i class="nav-icon fas fa-map-pin"></i>
+                                <p>Tujuan Perjalanan</p>
+                            </a>
+                        </li>
+
                         <!-- Settings -->
                         <li class="nav-item">
                             <a href="{{ route('admin.settings') }}" class="nav-link @if(request()->routeIs('admin.settings')) active @endif">

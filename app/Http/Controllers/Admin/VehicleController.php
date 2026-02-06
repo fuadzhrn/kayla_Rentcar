@@ -25,21 +25,21 @@ class VehicleController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:100',
-            'model' => 'required|string|max:100',
-            'year' => 'required|integer|min:2000|max:' . date('Y'),
-            'vehicle_type' => 'required|in:Compact,Sedan,SUV,MPV,Truck',
             'transmission' => 'required|in:Manual,Automatic',
-            'engine_cc' => 'required|integer',
             'fuel_type' => 'required|in:Petrol,Diesel,Hybrid',
             'seat_capacity' => 'required|integer|min:1|max:10',
             'price_per_day' => 'required|numeric|min:0',
             'price_per_week' => 'nullable|numeric|min:0',
             'price_per_month' => 'nullable|numeric|min:0',
             'description' => 'nullable|string',
+            'has_ac' => 'nullable|boolean',
             'is_available' => 'nullable|boolean',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
+
+        // Convert checkbox values properly
+        $validated['has_ac'] = $request->has('has_ac') ? true : false;
+        $validated['is_available'] = $request->has('is_available') ? true : false;
 
         $vehicle = Vehicle::create($validated);
 
@@ -75,21 +75,21 @@ class VehicleController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:100',
-            'model' => 'required|string|max:100',
-            'year' => 'required|integer|min:2000|max:' . date('Y'),
-            'vehicle_type' => 'required|in:Compact,Sedan,SUV,MPV,Truck',
             'transmission' => 'required|in:Manual,Automatic',
-            'engine_cc' => 'required|integer',
             'fuel_type' => 'required|in:Petrol,Diesel,Hybrid',
             'seat_capacity' => 'required|integer|min:1|max:10',
             'price_per_day' => 'required|numeric|min:0',
             'price_per_week' => 'nullable|numeric|min:0',
             'price_per_month' => 'nullable|numeric|min:0',
             'description' => 'nullable|string',
+            'has_ac' => 'nullable|boolean',
             'is_available' => 'nullable|boolean',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
+
+        // Convert checkbox values properly
+        $validated['has_ac'] = $request->has('has_ac') ? true : false;
+        $validated['is_available'] = $request->has('is_available') ? true : false;
 
         $vehicle->update($validated);
 

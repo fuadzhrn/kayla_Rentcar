@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use App\Models\VehicleImage;
-use App\Models\VehicleFeature;
 use App\Models\Gallery;
+use App\Models\RentalType;
 
 class DashboardController extends Controller
 {
@@ -14,9 +14,8 @@ class DashboardController extends Controller
     {
         $totalVehicles = Vehicle::count();
         $totalImages = VehicleImage::count();
-        $totalFeatures = VehicleFeature::count();
         $availableVehicles = Vehicle::where('is_available', true)->count();
-        $totalGalleryPhotos = Gallery::count();
+        $totalRentalTypes = RentalType::count();
         
         $recentVehicles = Vehicle::orderBy('created_at', 'desc')
             ->limit(5)
@@ -27,9 +26,8 @@ class DashboardController extends Controller
         return view('admin.dashboard', [
             'totalVehicles' => $totalVehicles,
             'totalImages' => $totalImages,
-            'totalFeatures' => $totalFeatures,
             'availableVehicles' => $availableVehicles,
-            'totalGalleryPhotos' => $totalGalleryPhotos,
+            'totalRentalTypes' => $totalRentalTypes,
             'recentVehicles' => $recentVehicles,
             'vehiclesWithImages' => $vehiclesWithImages,
         ]);

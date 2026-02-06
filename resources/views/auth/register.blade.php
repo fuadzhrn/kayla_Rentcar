@@ -585,10 +585,15 @@
                                 name="name"
                                 placeholder="Nama Anda"
                                 value="{{ old('name') }}"
+                                maxlength="255"
+                                pattern="^[a-zA-Z\s\'-]+$"
+                                title="Nama hanya boleh mengandung huruf, spasi, tanda kutip, dan tanda hubung"
                                 required
+                                autocomplete="name"
                             >
+                            <small class="text-muted">Hanya huruf, spasi, tanda kutip dan tanda hubung diizinkan</small>
                             @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -604,7 +609,9 @@
                                 name="email"
                                 placeholder="admin@kalyarentcar.com"
                                 value="{{ old('email') }}"
+                                maxlength="255"
                                 required
+                                autocomplete="email"
                             >
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -623,7 +630,11 @@
                                     id="password" 
                                     name="password"
                                     placeholder="••••••••"
+                                    maxlength="255"
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$"
+                                    title="Password harus minimal 8 karakter dengan huruf besar, kecil, angka, dan simbol"
                                     required
+                                    autocomplete="new-password"
                                 >
                                 <button 
                                     type="button" 
@@ -634,8 +645,11 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
+                            <small class="text-muted">
+                                Minimal 8 karakter, harus mengandung: huruf besar (A-Z), huruf kecil (a-z), angka (0-9), simbol (!@#$%^&*)
+                            </small>
                             @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -651,7 +665,9 @@
                                     id="password_confirmation" 
                                     name="password_confirmation"
                                     placeholder="••••••••"
+                                    maxlength="255"
                                     required
+                                    autocomplete="new-password"
                                 >
                                 <button 
                                     type="button" 

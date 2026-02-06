@@ -80,6 +80,19 @@
                         <div class="service-info" id="serviceInfo">
                             <p id="serviceDescription"></p>
                         </div>
+
+                        <!-- TUJUAN PERJALANAN - Muncul hanya untuk Mobil + Driver -->
+                        <div class="form-group" id="destinationGroup" style="display: none; margin-top: 20px;">
+                            <label for="destination">Tujuan Perjalanan <span class="required">*</span></label>
+                            <select id="destination" name="destination" onchange="updateCalculator()">
+                                <option value="">-- Pilih Tujuan --</option>
+                                @forelse($destinations ?? [] as $dest)
+                                <option value="{{ $dest->id }}" data-fee="{{ $dest->fee_per_day }}">{{ $dest->name }} (+Rp {{ number_format($dest->fee_per_day, 0, ',', '.') }}/hari)</option>
+                                @empty
+                                <option value="">Tidak ada tujuan tersedia</option>
+                                @endforelse
+                            </select>
+                        </div>
                     </div>
 
                     <!-- RENTAL DETAILS SECTION -->
@@ -93,7 +106,7 @@
                             <select id="vehicle" name="vehicle" required onchange="updateCalculator()">
                                 <option value="">-- Pilih Kendaraan --</option>
                                 @foreach($vehicles as $vehicle)
-                                <option value="{{ $vehicle->id }}" data-price="{{ $vehicle->price_per_day }}">{{ $vehicle->brand }} {{ $vehicle->model }} - Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</option>
+                                <option value="{{ $vehicle->id }}" data-price="{{ $vehicle->price_per_day }}">{{ $vehicle->name }} - Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</option>
                                 @endforeach
                             </select>
                         </div>
@@ -143,6 +156,8 @@
                             <span class="calc-label">Durasi</span>
                             <span class="calc-value" id="calcDays">0 hari</span>
                         </div>
+
+                        <div id="calcBreakdown"></div>
 
                         <div class="calc-divider"></div>
 

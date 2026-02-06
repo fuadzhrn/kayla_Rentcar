@@ -61,12 +61,24 @@ function updateServiceInfo() {
     const service = document.getElementById('service').value;
     const serviceInfo = document.getElementById('serviceInfo');
     const description = document.getElementById('serviceDescription');
+    const destinationGroup = document.getElementById('destinationGroup');
     
     if (service && serviceDescriptions[service]) {
         description.textContent = serviceDescriptions[service];
         serviceInfo.style.display = 'block';
     } else {
         serviceInfo.style.display = 'none';
+    }
+    
+    // Show destination field only for "mobil-driver" service
+    if (service === 'mobil-driver') {
+        destinationGroup.style.display = 'block';
+        document.getElementById('destination').required = true;
+    } else {
+        destinationGroup.style.display = 'none';
+        document.getElementById('destination').required = false;
+        document.getElementById('destination').value = '';
+        updateCalculator();
     }
 }
 
@@ -98,6 +110,7 @@ function calculateDays() {
 function updateCalculator() {
     const vehicleSelect = document.getElementById('vehicle');
     const daysInput = document.getElementById('days');
+    const service = document.getElementById('service').value;
     
     // Get selected vehicle
     const selectedOption = vehicleSelect.options[vehicleSelect.selectedIndex];
@@ -105,13 +118,44 @@ function updateCalculator() {
     const pricePerDay = parseInt(selectedOption.getAttribute('data-price')) || 0;
     const days = parseInt(daysInput.value) || 1;
     
+    // Get destination fee if service is mobil-driver
+    let additionalFeePerDay = 0;
+    let destinationLabel = '';
+    
+    if (service === 'mobil-driver') {
+        const destinationSelect = document.getElementById('destination');
+        const selectedDestination = destinationSelect.options[destinationSelect.selectedIndex];
+        additionalFeePerDay = parseInt(selectedDestination.getAttribute('data-fee')) || 0;
+        destinationLabel = selectedDestination.text.split(' (')[0];
+    }
+    
     // Update calculator display
     document.getElementById('calcVehicle').textContent = vehicleName || '-';
     document.getElementById('calcPrice').textContent = formatCurrency(pricePerDay);
     document.getElementById('calcDays').textContent = days + ' hari';
     
     // Calculate total
-    const total = pricePerDay * days;
+    const vehicleTotal = pricePerDay * days;
+    const additionalFeeTotal = additionalFeePerDay * days;
+    const total = vehicleTotal + additionalFeeTotal;
+    
+    // Update display with additional fee if applicable
+    let calcDisplay = formatCurrency(total);
+    if (additionalFeePerDay > 0) {
+        document.getElementById('calcBreakdown').innerHTML = `
+            <div class="calc-item">
+                <span class="calc-label">Harga Kendaraan</span>
+                <span class="calc-value">${formatCurrency(vehicleTotal)}</span>
+            </div>
+            <div class="calc-item">
+                <span class="calc-label">Biaya ${destinationLabel}</span>
+                <span class="calc-value">${formatCurrency(additionalFeeTotal)}</span>
+            </div>
+            <div class="calc-divider"></div>
+        `;
+    } else {
+        document.getElementById('calcBreakdown').innerHTML = '';
+    }
     
     // Update display
     document.getElementById('calcTotal').textContent = formatCurrency(total);
@@ -139,6 +183,15 @@ function handleFormSubmit(e) {
     const checkout = document.getElementById('checkout').value;
     const days = document.getElementById('days').value;
     
+    // Get destination if applicable
+    let destinationLabel = '';
+    let destinationInfo = '';
+    if (serviceCode === 'mobil-driver') {
+        const destinationSelect = document.getElementById('destination');
+        destinationLabel = destinationSelect.options[destinationSelect.selectedIndex].text;
+        destinationInfo = '\nTujuan Perjalanan: ' + destinationLabel;
+    }
+    
     // Validate required fields
     if (!nama) {
         alert('⚠️ Nama lengkap harus diisi!');
@@ -156,6 +209,16 @@ function handleFormSubmit(e) {
         alert('⚠️ Jenis layanan harus dipilih!');
         document.getElementById('service').focus();
         return;
+    }
+    
+    // Validate destination is selected if service is mobil-driver
+    if (serviceCode === 'mobil-driver') {
+        const destination = document.getElementById('destination').value;
+        if (!destination) {
+            alert('⚠️ Tujuan perjalanan harus dipilih untuk layanan Mobil + Driver!');
+            document.getElementById('destination').focus();
+            return;
+        }
     }
     
     if (!vehicleSelect.value) {
@@ -194,20 +257,20 @@ function handleFormSubmit(e) {
      FORMULIR SEWA MOBIL - KALYA RENTCAR
 ════════════════════════════════════════
 
-📋 DATA PEMESAN
+DATA PEMESAN
 Nama Lengkap: ${nama}
 No WhatsApp: ${whatsapp}
 Email: ${email ? email : '(tidak diisi)'}
 
-🚗 DETAIL PEMESANAN
+DETAIL PEMESANAN
 Jenis Layanan: ${serviceName}
 Kendaraan: ${vehicleLabel}
-Harga Per Hari: ${pricePerDay}
+Harga Per Hari: ${pricePerDay}${destinationInfo}
 Tanggal Mulai: ${formatDate(checkin)}
 Tanggal Kembali: ${formatDate(checkout)}
 Durasi Sewa: ${days} hari
 
-💵 RINGKASAN BIAYA
+RINGKASAN BIAYA
 Total Biaya: ${totalText}
 
 ════════════════════════════════════════
