@@ -245,6 +245,47 @@ window.addEventListener('resize', () => {
 document.addEventListener('DOMContentLoaded', () => {
     initSlider();
     
+    // Initialize Lazy Loading for Vehicle Cards
+    const initLazyLoadVehicles = () => {
+        const slider = document.querySelector('.vehicles-slider');
+        const cards = document.querySelectorAll('.vehicle-card');
+        
+        if (!slider || cards.length === 0) return;
+        
+        // Mark all cards as lazy-loading initially
+        cards.forEach(card => {
+            card.classList.add('lazy-loading');
+        });
+        
+        // Create Intersection Observer
+        const lazyLoadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Show card when visible
+                    entry.target.classList.remove('lazy-loading');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.visibility = 'visible';
+                    entry.target.style.height = 'auto';
+                } else {
+                    // Hide card when not visible (but keep in DOM for smooth transition)
+                    entry.target.classList.add('lazy-loading');
+                    entry.target.style.opacity = '0';
+                    entry.target.style.visibility = 'hidden';
+                    entry.target.style.height = '0';
+                }
+            });
+        }, {
+            root: slider,
+            threshold: 0,
+            rootMargin: '200px' // Pre-load 200px before visible
+        });
+        
+        // Observe all cards
+        cards.forEach(card => {
+            lazyLoadObserver.observe(card);
+        });
+    };
+    
     // Initialize hardware acceleration for vehicle cards
     const vehicleCards = document.querySelectorAll('.vehicle-card');
     vehicleCards.forEach(card => {
@@ -259,6 +300,9 @@ document.addEventListener('DOMContentLoaded', () => {
         vehicleSlider.style.willChange = 'transform';
         vehicleSlider.style.backfaceVisibility = 'hidden';
     }
+    
+    // Call lazy load initialization
+    initLazyLoadVehicles();
 });
 
 // Re-initialize slider on window resize
