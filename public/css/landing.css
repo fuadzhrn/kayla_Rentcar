@@ -1913,7 +1913,7 @@ html {
     }
 
     .vehicles-slider-container {
-        overflow: visible;
+        overflow: hidden;
         scroll-behavior: smooth;
     }
 
@@ -2141,6 +2141,10 @@ html {
 }
 
 @media (max-width: 480px) {
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
     .hero-title { font-size: 1.6rem !important; }
     .hero-description { font-size: 0.75rem !important; }
     .hero-left { padding: 0 3% !important; }
@@ -2150,6 +2154,7 @@ html {
     .features { padding: 2rem 3% !important; }
     .rental-types { padding: 2rem 3% !important; }
     .vehicles { padding: 2rem 3% !important; }
+    .vehicles-slider-container { overflow: hidden !important; }
     .how-it-works { padding: 2rem 3% !important; }
     .location { padding: 2rem 3% !important; }
     .whatsapp-float { width: 55px !important; height: 55px !important; }
