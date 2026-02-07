@@ -244,6 +244,21 @@ window.addEventListener('resize', () => {
 // Grid layout for rental types (no slider needed)
 document.addEventListener('DOMContentLoaded', () => {
     initSlider();
+    
+    // Initialize hardware acceleration for vehicle cards
+    const vehicleCards = document.querySelectorAll('.vehicle-card');
+    vehicleCards.forEach(card => {
+        card.style.willChange = 'transform';
+        card.style.backfaceVisibility = 'hidden';
+        card.style.transform = 'translateZ(0)';
+        card.style.perspective = '1000px';
+    });
+    
+    const vehicleSlider = document.querySelector('.vehicles-slider');
+    if (vehicleSlider) {
+        vehicleSlider.style.willChange = 'transform';
+        vehicleSlider.style.backfaceVisibility = 'hidden';
+    }
 });
 
 // Re-initialize slider on window resize
