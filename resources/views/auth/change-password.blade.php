@@ -462,17 +462,26 @@
         @media (max-width: 768px) {
             .login-wrapper {
                 flex-direction: column;
+                height: auto;
+            }
+
+            body {
+                position: static;
+                height: auto;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
 
             .login-hero {
-                padding: 40px 20px;
+                padding: 30px 20px;
                 min-height: auto;
-                padding-bottom: 30px;
+                padding-bottom: 25px;
+                border-radius: 0 0 30px 30px;
             }
 
             .hero-icon {
-                font-size: 60px;
-                margin-bottom: 20px;
+                font-size: 65px;
+                margin-bottom: 18px;
             }
 
             .hero-title {
@@ -485,8 +494,17 @@
                 margin-bottom: 20px;
             }
 
+            .hero-feature {
+                font-size: 13px;
+            }
+
+            .hero-feature i {
+                width: 35px;
+                height: 35px;
+            }
+
             .login-form-section {
-                padding: 30px 15px;
+                padding: 25px 20px;
                 min-height: auto;
             }
 
@@ -494,10 +512,207 @@
                 max-width: 100%;
             }
 
-            body {
-                position: static;
-                height: auto;
-                overflow-y: auto;
+            .form-title {
+                font-size: 20px;
+            }
+
+            .login-form-card {
+                padding: 25px 18px;
+                border-radius: 20px;
+            }
+
+            .form-control {
+                padding: 11px 12px;
+                font-size: 13px;
+            }
+
+            .btn-login {
+                padding: 11px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-shapes {
+                display: none;
+            }
+
+            .form-bg-shapes {
+                display: none;
+            }
+
+            .login-hero {
+                padding: 25px 15px;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+            }
+
+            .login-form-section {
+                padding: 20px 15px;
+            }
+
+            .login-form-card {
+                padding: 22px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html, body {
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .hero-title {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .hero-icon {
+                font-size: 58px;
+                margin-bottom: 12px;
+            }
+
+            .hero-feature {
+                font-size: 12px;
+            }
+
+            .hero-feature i {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .login-hero {
+                padding: 20px 15px;
+                min-height: auto;
+                padding-bottom: 20px;
+                border-radius: 0 0 25px 25px;
+            }
+
+            .login-form-section {
+                padding: 18px 15px 30px;
+                min-height: auto;
+            }
+
+            .login-form-container {
+                max-width: 100%;
+            }
+
+            .login-form-card {
+                padding: 20px 15px;
+                border-radius: 16px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+
+            .form-header {
+                margin-bottom: 18px;
+            }
+
+            .form-logo {
+                width: 38px;
+                height: 38px;
+                margin-bottom: 8px;
+                box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            }
+
+            .form-logo i {
+                font-size: 18px;
+            }
+
+            .form-title {
+                font-size: 17px;
+                font-weight: 700;
+                margin-bottom: 2px;
+            }
+
+            .form-subtitle {
+                font-size: 9px;
+            }
+
+            .form-group {
+                margin-bottom: 9px;
+            }
+
+            .form-label {
+                font-size: 10px;
+                margin-bottom: 4px;
+                letter-spacing: 0.3px;
+            }
+
+            .form-control {
+                padding: 10px 11px;
+                font-size: 12px;
+                border-radius: 8px;
+                min-height: 40px;
+            }
+
+            .form-control::placeholder {
+                color: rgba(255, 255, 255, 0.25);
+            }
+
+            .form-check {
+                margin-bottom: 10px;
+            }
+
+            .form-check-input {
+                width: 14px;
+                height: 14px;
+                margin-right: 6px;
+            }
+
+            .form-check-label {
+                font-size: 10px;
+            }
+
+            .btn-login {
+                padding: 10px 11px;
+                font-size: 12px;
+                border-radius: 8px;
+                min-height: 44px;
+                margin-bottom: 8px;
+            }
+
+            .invalid-feedback {
+                font-size: 11px;
+                margin-top: 4px;
+            }
+
+            .alert {
+                padding: 10px 12px;
+                margin-bottom: 15px;
+                font-size: 12px;
+                border-radius: 10px;
+            }
+
+            #batal,
+            .btn-cancel {
+                padding: 10px 11px;
+                font-size: 12px;
+                border-radius: 8px;
+                min-height: 44px;
+            }
+
+            .back-home {
+                margin-top: 8px;
+                text-align: center;
+            }
+
+            .back-home a {
+                font-size: 11px;
+                gap: 4px;
             }
         }
     </style>

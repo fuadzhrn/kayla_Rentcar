@@ -526,60 +526,298 @@
         @media (max-width: 768px) {
             .login-wrapper {
                 flex-direction: column;
+                height: auto;
             }
 
-            .login-hero {
-                min-height: 40vh;
-                padding: 30px 20px;
-                border-radius: 0 0 40px 40px;
+            body {
+                height: auto;
+                position: static;
+                overflow-y: auto;
             }
 
-            .login-form-section {
-                min-height: 60vh;
-                padding: 30px 20px;
-            }
-
-            .hero-title {
-                font-size: 28px;
-            }
-
-            .hero-icon {
-                font-size: 80px;
-                margin-bottom: 20px;
-            }
-
-            .form-title {
-                font-size: 22px;
-            }
-
-            .login-form-card {
-                padding: 35px 25px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .login-hero {
                 min-height: 35vh;
+                padding: 30px 20px;
+                border-radius: 0 0 30px 30px;
             }
 
             .login-form-section {
                 min-height: 65vh;
+                padding: 25px 20px;
             }
 
             .hero-title {
-                font-size: 24px;
+                font-size: 28px;
+                margin-bottom: 12px;
             }
 
-            .form-title {
-                font-size: 20px;
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 25px;
             }
 
-            .login-form-card {
-                padding: 30px 20px;
+            .hero-icon {
+                font-size: 70px;
+                margin-bottom: 15px;
             }
 
             .hero-feature {
                 font-size: 13px;
+                gap: 10px;
+            }
+
+            .hero-feature i {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .form-title {
+                font-size: 20px;
+                margin-bottom: 3px;
+            }
+
+            .form-subtitle {
+                font-size: 10px;
+            }
+
+            .login-form-card {
+                padding: 25px 18px;
+                border-radius: 20px;
+            }
+
+            .login-form-container {
+                max-width: 100%;
+            }
+
+            .form-logo {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+
+            .form-logo i {
+                font-size: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 10px;
+            }
+
+            .form-control {
+                padding: 11px 12px;
+                font-size: 13px;
+            }
+
+            .btn-login {
+                padding: 11px 12px;
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            .change-password-section {
+                margin-top: 8px;
+            }
+
+            .btn-change-password {
+                font-size: 12px;
+                padding: 10px 12px;
+            }
+
+            .back-home a {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-shapes {
+                display: none;
+            }
+
+            .form-bg-shapes {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            .login-hero {
+                min-height: 32vh;
+                padding: 25px 15px;
+            }
+
+            .login-form-section {
+                min-height: 68vh;
+                padding: 20px 15px;
+            }
+
+            .login-form-card {
+                padding: 22px 16px;
+            }
+
+            .form-title {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html, body {
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .hero-title {
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .hero-icon {
+                font-size: 60px;
+                margin-bottom: 12px;
+            }
+
+            .hero-feature {
+                font-size: 12px;
+            }
+
+            .hero-feature i {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .login-hero {
+                min-height: 30vh;
+                padding: 20px 15px;
+                border-radius: 0 0 25px 25px;
+            }
+
+            .login-form-section {
+                min-height: auto;
+                padding: 18px 15px 30px;
+            }
+
+            .login-form-container {
+                max-width: 100%;
+            }
+
+            .login-form-card {
+                padding: 20px 15px;
+                border-radius: 16px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+
+            .form-logo {
+                width: 38px;
+                height: 38px;
+                margin-bottom: 8px;
+                box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            }
+
+            .form-logo i {
+                font-size: 18px;
+            }
+
+            .form-header {
+                margin-bottom: 18px;
+            }
+
+            .form-title {
+                font-size: 17px;
+                font-weight: 700;
+                margin-bottom: 2px;
+            }
+
+            .form-subtitle {
+                font-size: 9px;
+            }
+
+            .form-group {
+                margin-bottom: 9px;
+            }
+
+            .form-label {
+                font-size: 10px;
+                margin-bottom: 4px;
+                letter-spacing: 0.3px;
+            }
+
+            .form-control {
+                padding: 10px 11px;
+                font-size: 12px;
+                border-radius: 8px;
+                min-height: 40px;
+            }
+
+            .form-control::placeholder {
+                color: rgba(255, 255, 255, 0.25);
+            }
+
+            .form-check {
+                margin-bottom: 10px;
+            }
+
+            .form-check-input {
+                width: 14px;
+                height: 14px;
+                margin-right: 6px;
+            }
+
+            .form-check-label {
+                font-size: 10px;
+            }
+
+            .btn-login {
+                padding: 10px 11px;
+                font-size: 12px;
+                border-radius: 8px;
+                min-height: 44px;
+                letter-spacing: 0.5px;
+                margin-bottom: 8px;
+            }
+
+            .invalid-feedback {
+                font-size: 11px;
+                margin-top: 4px;
+            }
+
+            .alert {
+                padding: 10px 12px;
+                margin-bottom: 15px;
+                font-size: 12px;
+                border-radius: 10px;
+            }
+
+            .change-password-section {
+                margin-top: 6px;
+            }
+
+            .btn-change-password {
+                font-size: 11px;
+                padding: 9px 11px;
+                border-radius: 8px;
+                min-height: 40px;
+            }
+
+            .back-home {
+                margin-top: 8px;
+                text-align: center;
+            }
+
+            .back-home a {
+                font-size: 11px;
+                gap: 4px;
             }
         }
     </style>
