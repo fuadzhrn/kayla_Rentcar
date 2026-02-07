@@ -2139,3 +2139,18 @@ html {
         font-size: 0.75rem;
     }
 }
+
+@media (max-width: 480px) {
+    .hero-title { font-size: 1.6rem !important; }
+    .hero-description { font-size: 0.75rem !important; }
+    .hero-left { padding: 0 3% !important; }
+    .hero-right { display: none !important; }
+    .section-title { font-size: 1.8rem !important; }
+    .stats { padding: 2rem 3% !important; }
+    .features { padding: 2rem 3% !important; }
+    .rental-types { padding: 2rem 3% !important; }
+    .vehicles { padding: 2rem 3% !important; }
+    .how-it-works { padding: 2rem 3% !important; }
+    .location { padding: 2rem 3% !important; }
+    .whatsapp-float { width: 55px !important; height: 55px !important; }
+}
