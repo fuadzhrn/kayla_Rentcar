@@ -41,7 +41,7 @@
                             <tbody>
                                 @forelse($vehicles as $key => $vehicle)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $vehicles->firstItem() + $key }}</td>
                                         <td>
                                             @if($vehicle->images()->where('is_primary', true)->count() > 0)
                                                 <img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}" style="height: 60px; width: 60px; object-fit: cover; border-radius: 5px;" onerror="this.src='/img/placeholder.png'">
@@ -93,6 +93,20 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Pagination Links -->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info">
+                                Menampilkan {{ $vehicles->firstItem() ?? 0 }} sampai {{ $vehicles->lastItem() ?? 0 }} dari {{ $vehicles->total() }} data
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" style="float: right;">
+                                {{ $vehicles->links('pagination::bootstrap-4') }}
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>
@@ -103,18 +117,11 @@
 <script>
     $(document).ready(function() {
         $('#vehiclesTable').DataTable({
-            "lengthChange": true,
-            "pageLength": 10,
+            "paging": false,
+            "info": false,
+            "searching": true,
             "language": {
-                "search": "Cari:",
-                "lengthMenu": "Tampilkan _MENU_ data per halaman",
-                "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                "paginate": {
-                    "first": "Pertama",
-                    "last": "Terakhir",
-                    "next": "Berikutnya",
-                    "previous": "Sebelumnya"
-                }
+                "search": "Cari:"
             }
         });
     });

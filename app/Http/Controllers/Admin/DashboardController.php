@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $totalVehicles = Vehicle::count();
-        $totalImages = VehicleImage::count();
+        $totalGalleries = Gallery::count();  // Hanya hitung foto galeri
         $availableVehicles = Vehicle::where('is_available', true)->count();
         $totalRentalTypes = RentalType::count();
         
@@ -25,7 +25,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', [
             'totalVehicles' => $totalVehicles,
-            'totalImages' => $totalImages,
+            'totalGalleries' => $totalGalleries,
             'availableVehicles' => $availableVehicles,
             'totalRentalTypes' => $totalRentalTypes,
             'recentVehicles' => $recentVehicles,

@@ -22,11 +22,11 @@
         </div>
     </div>
 
-    <!-- Total Images -->
+    <!-- Total Galleries -->
     <div class="col-lg-3 col-6">
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>{{ $totalImages ?? 0 }}</h3>
+                <h3>{{ $totalGalleries ?? 0 }}</h3>
                 <p>Total Foto Galeri</p>
             </div>
             <div class="icon">
@@ -136,8 +136,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h3 style="color: #FFD700;">{{ $totalImages ?? 0 }}</h3>
-                            <p>Total Foto</p>
+                            <h3 style="color: #FFD700;">{{ $totalGalleries ?? 0 }}</h3>
+                            <p>Total Foto Galeri</p>
                         </div>
                     </div>
                     <div class="col-md-6">

@@ -434,6 +434,60 @@
         }
 
         /* Back Home */
+        .change-password-section {
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn-change-password {
+            width: 100%;
+            background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            border: none;
+            color: #1a1a1a;
+            padding: 10px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-change-password::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-change-password:hover::before {
+            left: 100%;
+        }
+
+        .btn-change-password:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            color: #1a1a1a;
+        }
+
+        .btn-change-password:active {
+            transform: translateY(0);
+        }
+
         .back-home {
             text-align: center;
             margin-top: 10px;
@@ -673,14 +727,11 @@
                         </button>
                     </form>
 
-                    <!-- Divider -->
-                    <div class="divider">
-                        <span>atau</span>
-                    </div>
-
-                    <!-- Register Link -->
-                    <div class="register-link">
-                        Belum punya akun? <a href="{{ route('auth.register') }}">Daftar di sini</a>
+                    <!-- Change Password Button -->
+                    <div class="change-password-section">
+                        <a href="{{ route('admin.change-password') }}" class="btn-change-password">
+                            <i class="fas fa-key"></i> Ubah Password
+                        </a>
                     </div>
 
                     <!-- Back to Home -->

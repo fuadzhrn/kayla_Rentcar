@@ -34,7 +34,7 @@
             <li><a href="gallery">Gallery</a></li>
             <li><a href="#vehicles">Kendaraan</a></li>
             <li><a href="#location">Alamat</a></li>
-            <li><a href="/login" style="color: #FFD700; font-weight: 600;"><i class="fas fa-lock"></i> Admin</a></li>
+            
         </ul>
         <button class="burger-menu" id="burgerMenu">
             <span></span>
@@ -90,7 +90,7 @@
             <!-- Right Column - Image -->
             <div class="hero-right">
                 <div class="hero-image-wrapper">
-                    <img src="/img/gambar_bg.png" alt="Car" class="hero-car-image">
+                    <img src="/img/gambar_bg3.png" alt="Car" class="hero-car-image">
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
                 <div class="stat-label">Pelanggan Puas</div>
             </div>
             <div class="stat-box scroll-fade">
-                <div class="stat-number" data-value="150">150+</div>
+                <div class="stat-number" data-value="{{ count($vehicles) }}">{{ count($vehicles) }}+</div>
                 <div class="stat-label">Kendaraan Tersedia</div>
             </div>
             <div class="stat-box scroll-fade">
@@ -182,6 +182,21 @@
         <h2 class="section-title">Armada <span>Kendaraan</span></h2>
         <div class="vehicles-slider-container">
             <div class="vehicles-slider">
+            <!-- Static Vehicle Card - HIACE COMMUTER -->
+            <div class="vehicle-card scroll-fade">
+                <div class="vehicle-image"><img src="/img/gambar17.png" alt="HIACE COMMUTER"></div>
+                <div class="vehicle-info">
+                    <h4>HIACE COMMUTER</h4>
+                    <div class="vehicle-specs">
+                        <span><i class="fas fa-star" style="color: #FFD700;"></i> Premium Class</span>
+                    </div>
+                    <div class="vehicle-price" style="color: #FFD700; font-weight: bold;">Hubungi Admin untuk Harga</div>
+                    <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20tertarik%20dengan%20HIACE%20COMMUTER.%20Mohon%20informasi%20harga%20dan%20ketersediaan.%20Terima%20kasih." target="_blank" class="vehicle-btn">
+                        Call Admin
+                    </a>
+                </div>
+            </div>
+
             @forelse($vehicles as $vehicle)
             <div class="vehicle-card scroll-fade">
                 <div class="vehicle-image"><img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}"></div>
@@ -292,7 +307,7 @@
                 </div>
             </div>
 
-            <div class="location-map scroll-fade" onclick="window.open('https://www.google.com/maps/search/KALYA+RENTCAR', '_blank')" style="cursor: pointer; position: relative;">
+            <div class="location-map scroll-fade" onclick="window.open('https://maps.app.goo.gl/DTn9DDJdJNc21b2VA', '_blank')" style="cursor: pointer; position: relative;">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253825.47352509934!2d106.56154632568361!3d-6.260697372951346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f39efbdb8087%3A0x60460641e278555d!2sKALYA%20RENTCAR!5e0!3m2!1sid!2sid!4v1770415521235!5m2!1sid!2sid" style="width: 100%; height: 450px; border: 0; border-radius: 12px; pointer-events: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.9); color: #1a1a1a; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.3s ease;">
                     <i class="fas fa-external-link-alt"></i> Buka di Google Maps
@@ -335,7 +350,7 @@
                     <li><a href="#"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</a></li>
                     <li style="margin-top: 1rem;">
                         <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/kalyarentcar/" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
                         <a href="#" style="color: #FFD700;"><i class="fab fa-twitter"></i></a>
                     </li>
                 </ul>
@@ -347,7 +362,7 @@
     </footer>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="https://wa.me/6282156970588?text=Halo%20Kalya%20Rentcar%2C%20saya%20ingin%20memesan%20rental%20mobil.%20Mohon%20informasi%20mengenai%20ketersediaan%20kendaraan%20dan%20harga%20terbaru.%20Terima%20kasih." class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami di WhatsApp">
+    <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20ingin%20memesan%20rental%20mobil.%20Mohon%20informasi%20mengenai%20ketersediaan%20kendaraan%20dan%20harga%20terbaru.%20Terima%20kasih." class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami di WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 

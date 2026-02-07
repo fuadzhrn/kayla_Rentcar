@@ -56,22 +56,27 @@ const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
             entry.target.classList.add('animated');
-            const statNumbers = entry.target.querySelectorAll('.stat-number');
+            entry.target.classList.add('visible');
             
-            statNumbers.forEach(el => {
-                const target = parseInt(el.getAttribute('data-value'));
-                let current = 0;
-                const increment = target / 50;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        el.textContent = target + '+';
-                        clearInterval(timer);
-                    } else {
-                        el.textContent = Math.floor(current) + '+';
-                    }
-                }, 30);
-            });
+            // Small delay to ensure visibility before animation
+            setTimeout(() => {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                
+                statNumbers.forEach(el => {
+                    const target = parseInt(el.getAttribute('data-value'));
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            el.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = Math.floor(current) + '+';
+                        }
+                    }, 30);
+                });
+            }, 100);
             
             counterObserver.unobserve(entry.target);
         }
@@ -145,10 +150,29 @@ function initSlider() {
 
 function updateVehicleSlider() {
     const slider = document.querySelector('.vehicles-slider');
-    const itemWidth = getItemWidth();
-    const gap = window.innerWidth <= 767 ? 0.5 : 2/16;
-    const offset = -vehicleCurrentSlide * (itemWidth + gap) + '%';
-    slider.style.transform = `translateX(${offset})`;
+    const container = document.querySelector('.vehicles-slider-container');
+    
+    if (!container || !slider) return;
+    
+    // Calculate gap in pixels
+    let gapPx;
+    if (window.innerWidth <= 767) {
+        gapPx = 16; // 1rem
+    } else if (window.innerWidth <= 1024) {
+        gapPx = 24; // 1.5rem
+    } else {
+        gapPx = 32; // 2rem
+    }
+    
+    // Get actual card width from DOM (most reliable method)
+    const firstCard = document.querySelector('.vehicle-card');
+    if (!firstCard) return;
+    
+    const cardWidthPx = firstCard.offsetWidth;
+    
+    // Offset = current slide number * (card width + gap between cards)
+    const offsetPx = -(vehicleCurrentSlide * (cardWidthPx + gapPx));
+    slider.style.transform = `translateX(${offsetPx}px)`;
     
     document.querySelectorAll('.slider-dot').forEach((dot, index) => {
         dot.classList.toggle('active', index === vehicleCurrentSlide);
@@ -170,8 +194,42 @@ function goToVehicleSlide(index) {
     updateVehicleSlider();
 }
 
+// Touch/Swipe functionality for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+const swipeThreshold = 50; // Minimum swipe distance in pixels
+
+function handleSwipe() {
+    const difference = touchStartX - touchEndX;
+    
+    if (Math.abs(difference) > swipeThreshold) {
+        if (difference > 0) {
+            // Swiped left - show next vehicle
+            nextVehicle();
+        } else {
+            // Swiped right - show previous vehicle
+            prevVehicle();
+        }
+    }
+}
+
 // Initialize slider when page loads
-document.addEventListener('DOMContentLoaded', initSlider);
+document.addEventListener('DOMContentLoaded', function() {
+    initSlider();
+    
+    // Add touch listeners to slider container
+    const sliderContainer = document.querySelector('.vehicles-slider-container');
+    if (sliderContainer) {
+        sliderContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        sliderContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+    }
+});
 
 // Re-initialize slider on window resize
 window.addEventListener('resize', () => {

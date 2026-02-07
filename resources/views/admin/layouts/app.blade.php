@@ -106,6 +106,33 @@
         .small-box.bg-danger {
             background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%) !important;
         }
+
+        /* Dropdown Menu Styling */
+        .nav-link {
+            cursor: pointer;
+        }
+
+        .nav-treeview {
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-treeview.show {
+            display: block;
+        }
+
+        .nav-item > .nav-link > .right {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.menu-open > .nav-link > .right {
+            transform: rotateZ(90deg);
+        }
+
+        a.nav-link[href="javascript:void(0);"] {
+            cursor: pointer;
+            user-select: none;
+        }
     </style>
 
     @stack('styles')
@@ -175,15 +202,15 @@
                         </li>
 
                         <!-- Vehicles Management -->
-                        <li class="nav-item @if(request()->routeIs('admin.vehicles.*')) menu-open @endif">
-                            <a href="#" class="nav-link @if(request()->routeIs('admin.vehicles.*')) active @endif">
+                        <li class="nav-item @if(request()->routeIs('admin.vehicles.*')) menu-open @endif" id="vehicles-menu-item">
+                            <a href="javascript:void(0);" class="nav-link @if(request()->routeIs('admin.vehicles.*')) active @endif" id="vehicles-toggle">
                                 <i class="nav-icon fas fa-car"></i>
                                 <p>
                                     Manajemen Kendaraan
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview @if(request()->routeIs('admin.vehicles.*')) show @endif" id="vehicles-submenu">
                                 <li class="nav-item">
                                     <a href="{{ route('admin.vehicles.index') }}" class="nav-link @if(request()->routeIs('admin.vehicles.index')) active @endif">
                                         <i class="far fa-circle nav-icon"></i>
@@ -314,6 +341,18 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        // Handle sidebar dropdown toggle untuk Manajemen Kendaraan
+        document.getElementById('vehicles-toggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            const submenu = document.getElementById('vehicles-submenu');
+            const menuItem = document.getElementById('vehicles-menu-item');
+            
+            submenu.classList.toggle('show');
+            menuItem.classList.toggle('menu-open');
+        });
+    </script>
 
     @stack('scripts')
 </body>

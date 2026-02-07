@@ -12,7 +12,7 @@ class VehicleController extends Controller
 {
     public function index()
     {
-        $vehicles = Vehicle::with('images')->paginate(15);
+        $vehicles = Vehicle::with('images')->orderBy('created_at', 'desc')->paginate(5);
         return view('admin.vehicles.index', ['vehicles' => $vehicles]);
     }
 

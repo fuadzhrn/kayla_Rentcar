@@ -70,7 +70,7 @@ Mohon informasi selengkapnya
     }
     
     // Get admin WhatsApp number
-    const adminNumber = '6282156970588';
+    const adminNumber = '6285888212282';
     
     // Create WhatsApp link
     const whatsappLink = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;

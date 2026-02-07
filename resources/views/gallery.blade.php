@@ -119,12 +119,12 @@
             <div class="footer-section">
                 <h5>Hubungi Kami</h5>
                 <ul>
-                    <li><a href="tel:+62812345678"><i class="fas fa-phone"></i> +62 812-345-678</a></li>
+                    <li><a href="tel:+62812345678"><i class="fas fa-phone"></i> 085888212282</a></li>
                     <li><a href="mailto:info@kalyarentcar.com"><i class="fas fa-envelope"></i> info@kalyarentcar.com</a></li>
                     <li><a href="#"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</a></li>
                     <li style="margin-top: 1rem;">
                         <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/kalyarentcar/" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
                         <a href="#" style="color: #FFD700;"><i class="fab fa-twitter"></i></a>
                     </li>
                 </ul>

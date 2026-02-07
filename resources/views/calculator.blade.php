@@ -200,7 +200,7 @@
     </div>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="https://wa.me/628123456789" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami">
+    <a href="https://wa.me/6285888212282" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chat dengan kami">
         <i class="fab fa-whatsapp"></i>
     </a>
 

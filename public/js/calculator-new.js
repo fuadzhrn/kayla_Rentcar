@@ -332,7 +332,7 @@ Admin Kalya Rentcar
 `.trim();
     
     // Get admin WhatsApp number
-    const adminNumber = '6282156970588'; // Nomor Kalya Rentcar
+    const adminNumber = '6285888212282'; // Nomor Kalya Rentcar
     
     // Create WhatsApp link
     const whatsappLink = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
@@ -383,3 +383,4 @@ function sanitizeInput(input) {
     div.textContent = input;
     return div.innerHTML;
 }
+
