@@ -31,20 +31,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Scroll fade animation
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: [0, 0.1, 0.25],
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            entry.target.classList.remove('lazy');
             entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.add('lazy');
+            entry.target.classList.remove('visible');
         }
     });
 }, observerOptions);
 
-document.querySelectorAll('.scroll-fade').forEach(el => {
-    observer.observe(el);
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollFadeElements = document.querySelectorAll('.scroll-fade');
+    
+    scrollFadeElements.forEach((el) => {
+        // Check if element is already in viewport
+        const rect = el.getBoundingClientRect();
+        const isInViewport = (
+            rect.top < window.innerHeight &&
+            rect.bottom > 0
+        );
+        
+        if (isInViewport) {
+            // Element is in viewport, make it visible immediately
+            el.classList.add('visible');
+            el.classList.remove('lazy');
+        } else {
+            // Element not in viewport, add lazy class for animation
+            el.classList.add('lazy');
+        }
+        
+        // Observe for future viewport changes
+        observer.observe(el);
+    });
 });
 
 // Counter animation

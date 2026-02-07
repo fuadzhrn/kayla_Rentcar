@@ -868,8 +868,6 @@ nav {
 
 
 /* Hide old stats and features sections */
-.features {
-    display: none;
 }
 
 /* STATS SECTION */
@@ -1661,9 +1659,14 @@ footer {
 }
 
 .scroll-fade {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-fade.lazy {
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.6s ease-out;
 }
 
 .scroll-fade.visible {
