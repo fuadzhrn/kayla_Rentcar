@@ -90,7 +90,7 @@
             <!-- Right Column - Image -->
             <div class="hero-right">
                 <div class="hero-image-wrapper">
-                    <img src="/img/gambar_bg3.png" alt="Car" class="hero-car-image">
+                    <img src="/img/gambar_bg.png" alt="Car" class="hero-car-image">
                 </div>
             </div>
         </div>
@@ -280,7 +280,7 @@
                         <div class="address-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="address-text">
                             <h4>Kantor Pusat</h4>
-                            <p>Jl. Sudirman No. 123, Jakarta Pusat 12190, Indonesia</p>
+                            <p>Jl. Kalibata Timur Raya Gg. Jami Nurul Islam, RT.10/RW.10, 1B, Kec. Pancoran, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12830</p>
                         </div>
                     </div>
                     <div class="address-item">
@@ -349,9 +349,9 @@
                     <li><a href="mailto:Kelikkanopi2@gmail.com"><i class="fas fa-envelope"></i> Kelikkanopi2@gmail.com</a></li>
                     <li><a href="#"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</a></li>
                     <li style="margin-top: 1rem;">
-                        <a href="#" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/share/1CJe5dXsf2/?mibextid=wwXIfr" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/kalyarentcar/" style="color: #FFD700; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: #FFD700;"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.tiktok.com/@kalyarentcar?_r=1&_t=ZS-93iZO2nMlmO" style="color: #FFD700;"><i class="fab fa-tiktok"></i></a>
                     </li>
                 </ul>
             </div>
