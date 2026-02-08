@@ -154,8 +154,7 @@ window.addEventListener('scroll', () => {
 
 // Vehicle Slider
 let vehicleCurrentSlide = 0;
-const vehicleCards = document.querySelectorAll('.vehicle-card');
-const vehicleTotalSlides = vehicleCards.length;
+let vehicleTotalSlides = 0;
 
 function getItemsPerView() {
     if (window.innerWidth <= 767) return 1;
@@ -170,10 +169,16 @@ function getItemWidth() {
 }
 
 let itemsPerView = getItemsPerView();
-let maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
+let maxVehicleSlide = 0;
 
 function initSlider() {
+    // Count vehicles dynamically
+    const vehicleCards = document.querySelectorAll('.vehicle-card');
+    vehicleTotalSlides = vehicleCards.length;
+    
     const dotsContainer = document.getElementById('sliderDots');
+    if (!dotsContainer) return;
+    
     dotsContainer.innerHTML = ''; // Clear existing dots
     
     // Recalculate based on current window size
@@ -277,6 +282,9 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('resize', () => {
     const newItemsPerView = getItemsPerView();
     if (newItemsPerView !== itemsPerView) {
+        itemsPerView = newItemsPerView;
+        maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
+        vehicleCurrentSlide = Math.min(vehicleCurrentSlide, maxVehicleSlide);
         initSlider();
     }
 });
@@ -285,8 +293,6 @@ window.addEventListener('resize', () => {
 
 // Grid layout for rental types (no slider needed)
 document.addEventListener('DOMContentLoaded', () => {
-    initSlider();
-    
     // Initialize Lazy Loading for Vehicle Cards
     const initLazyLoadVehicles = () => {
         const slider = document.querySelector('.vehicles-slider');
