@@ -234,7 +234,10 @@ function goToVehicleSlide(index) {
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', initVehicleSlider);
+document.addEventListener('DOMContentLoaded', () => {
+    initVehicleSlider();
+    initSwipeListeners();
+});
 
 // Handle window resize for responsive slider
 let resizeTimer;
@@ -245,8 +248,45 @@ window.addEventListener('resize', () => {
         if (newItemsPerView !== vehicleItemsPerView) {
             vehicleCurrentSlide = 0;
             initVehicleSlider();
+            initSwipeListeners(); // Reinit swipe listeners for new breakpoint
         } else {
             updateVehicleSlider();
         }
     }, 250);
 });
+
+// ===== TOUCH/SWIPE FUNCTIONALITY =====
+let touchStartX = 0;
+let touchEndX = 0;
+let isDragging = false;
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum distance untuk trigger swipe
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe left - next slide
+            nextVehicle();
+        } else {
+            // Swipe right - previous slide
+            prevVehicle();
+        }
+    }
+}
+
+function initSwipeListeners() {
+    const slider = document.querySelector('.vehicles-slider');
+    if (!slider) return;
+    
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        isDragging = true;
+    }, false);
+    
+    slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        isDragging = false;
+        handleSwipe();
+    }, false);
+}

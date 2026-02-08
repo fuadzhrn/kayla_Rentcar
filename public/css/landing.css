@@ -1406,12 +1406,11 @@ nav {
         height: 40px;
         border-radius: 6px;
         font-size: 0.9rem;
-        display: none;
+        display: flex;
     }
 
     .slider-dot {
-        width: 8px;
-        height: 8px;
+        display: none;
     }
 
     .slider-dot.active {
