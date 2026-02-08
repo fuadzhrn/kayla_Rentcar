@@ -1111,9 +1111,13 @@ nav {
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     display: flex;
     align-items: center;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
 .vehicles-slider {
@@ -1123,8 +1127,8 @@ nav {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    transition: transform 0.5s ease-out;
     align-items: stretch;
+    scroll-snap-type: x proximity;
 }
 
 .vehicle-card {
@@ -1139,6 +1143,8 @@ nav {
     box-sizing: border-box;
     backdrop-filter: blur(10px);
     min-height: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: auto;
 }
 
 .vehicle-card:hover {
@@ -1303,10 +1309,12 @@ nav {
 @media (max-width: 1024px) and (min-width: 768px) {
     .vehicle-card {
         flex: 0 0 calc(50% - 0.75rem);
+        scroll-snap-align: start;
     }
 
     .vehicles-slider {
         gap: 1.2rem;
+        scroll-snap-type: x proximity;
     }
 
     .vehicle-image {
@@ -1362,14 +1370,19 @@ nav {
 
     .vehicles-slider-container {
         padding: 0;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
     }
 
     .vehicle-card {
         flex: 0 0 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: auto;
     }
 
     .vehicles-slider {
         gap: 1rem;
+        scroll-snap-type: x proximity;
     }
 
     .vehicle-image {

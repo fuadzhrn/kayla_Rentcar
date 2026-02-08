@@ -174,7 +174,7 @@ function initVehicleSlider() {
     vehicleItemsPerView = getVehicleItemsPerView();
     vehicleCurrentSlide = 0;
     
-    // Create dots
+    // Create dots based on visible items
     dotsContainer.innerHTML = '';
     const maxDots = Math.max(0, vehicleTotalSlides - vehicleItemsPerView + 1);
     
@@ -189,24 +189,19 @@ function initVehicleSlider() {
 }
 
 function updateVehicleSlider() {
-    const slider = document.querySelector('.vehicles-slider');
-    if (!slider) return;
+    const container = document.querySelector('.vehicles-slider-container');
+    if (!container) return;
     
-    const cards = slider.querySelectorAll('.vehicle-card');
-    if (!cards.length) return;
+    const cards = container.querySelectorAll('.vehicle-card');
+    if (!cards.length || !cards[vehicleCurrentSlide]) return;
     
-    // Get first card width for calculation
-    const firstCard = cards[0];
-    if (!firstCard) return;
-    
-    const cardWidth = firstCard.offsetWidth;
-    const gapValue = window.innerWidth <= 767 ? 16 : (window.innerWidth <= 1024 ? 19.2 : 24);
-    
-    // Calculate offset - simple and direct
-    const offset = vehicleCurrentSlide * (cardWidth + gapValue);
-    
-    // Apply transform directly
-    slider.style.transform = `translateX(-${offset}px)`;
+    // Smooth scroll ke card yang dituju
+    const targetCard = cards[vehicleCurrentSlide];
+    targetCard.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start'
+    });
     
     // Update dots
     document.querySelectorAll('.slider-dot').forEach((dot, idx) => {
@@ -223,7 +218,8 @@ function updateVehicleSlider() {
 }
 
 function nextVehicle() {
-    const maxSlide = Math.max(0, vehicleTotalSlides - vehicleItemsPerView);
+    const itemsPerView = getVehicleItemsPerView();
+    const maxSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
     if (vehicleCurrentSlide < maxSlide) {
         vehicleCurrentSlide++;
         updateVehicleSlider();
@@ -238,7 +234,8 @@ function prevVehicle() {
 }
 
 function goToVehicleSlide(index) {
-    const maxSlide = Math.max(0, vehicleTotalSlides - vehicleItemsPerView);
+    const itemsPerView = getVehicleItemsPerView();
+    const maxSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
     vehicleCurrentSlide = Math.max(0, Math.min(index, maxSlide));
     updateVehicleSlider();
 }
@@ -246,7 +243,6 @@ function goToVehicleSlide(index) {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     initVehicleSlider();
-    initSwipeListeners();
 });
 
 // Handle window resize for responsive slider
@@ -258,45 +254,8 @@ window.addEventListener('resize', () => {
         if (newItemsPerView !== vehicleItemsPerView) {
             vehicleCurrentSlide = 0;
             initVehicleSlider();
-            initSwipeListeners(); // Reinit swipe listeners for new breakpoint
         } else {
             updateVehicleSlider();
         }
     }, 250);
 });
-
-// ===== TOUCH/SWIPE FUNCTIONALITY =====
-let touchStartX = 0;
-let touchEndX = 0;
-let isDragging = false;
-
-function handleSwipe() {
-    const swipeThreshold = 50; // Minimum distance untuk trigger swipe
-    const diff = touchStartX - touchEndX;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-            // Swipe left - next slide
-            nextVehicle();
-        } else {
-            // Swipe right - previous slide
-            prevVehicle();
-        }
-    }
-}
-
-function initSwipeListeners() {
-    const slider = document.querySelector('.vehicles-slider');
-    if (!slider) return;
-    
-    slider.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        isDragging = true;
-    }, false);
-    
-    slider.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        isDragging = false;
-        handleSwipe();
-    }, false);
-}
