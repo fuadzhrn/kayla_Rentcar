@@ -189,19 +189,22 @@ function initVehicleSlider() {
 }
 
 function updateVehicleSlider() {
-    const container = document.querySelector('.vehicles-slider-container');
-    if (!container) return;
+    const slider = document.querySelector('.vehicles-slider');
+    if (!slider) return;
     
-    const cards = container.querySelectorAll('.vehicle-card');
-    if (!cards.length || !cards[vehicleCurrentSlide]) return;
+    const cards = slider.querySelectorAll('.vehicle-card');
+    if (!cards.length) return;
     
-    // Smooth scroll ke card yang dituju
-    const targetCard = cards[vehicleCurrentSlide];
-    targetCard.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start'
-    });
+    // Get card width and gap for calculation
+    const firstCard = cards[0];
+    const cardWidth = firstCard.offsetWidth;
+    const gapValue = window.innerWidth <= 767 ? 16 : (window.innerWidth <= 1024 ? 19.2 : 24);
+    
+    // Calculate offset - simple and direct
+    const offset = vehicleCurrentSlide * (cardWidth + gapValue);
+    
+    // Apply transform
+    slider.style.transform = `translateX(-${offset}px)`;
     
     // Update dots
     document.querySelectorAll('.slider-dot').forEach((dot, idx) => {
@@ -240,9 +243,87 @@ function goToVehicleSlide(index) {
     updateVehicleSlider();
 }
 
+// ===== SWIPE/DRAG FUNCTIONALITY =====
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+let isDragging = false;
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum distance untuk trigger swipe
+    const verticalThreshold = 30; // Max vertical movement untuk valid swipe
+    
+    const horizontalDiff = touchStartX - touchEndX;
+    const verticalDiff = Math.abs(touchStartY - touchEndY);
+    
+    // Check if swipe is mostly horizontal (not vertical scroll)
+    if (verticalDiff > verticalThreshold) {
+        return; // User doing vertical scroll, ignore
+    }
+    
+    if (Math.abs(horizontalDiff) > swipeThreshold) {
+        if (horizontalDiff > 0) {
+            // Swipe left - next slide
+            nextVehicle();
+        } else {
+            // Swipe right - previous slide
+            prevVehicle();
+        }
+    }
+}
+
+function initSwipeListeners() {
+    const container = document.querySelector('.vehicles-slider-container');
+    if (!container) return;
+    
+    container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isDragging = true;
+    }, false);
+    
+    container.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+            // Optional: Add visual feedback during drag
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+        }
+    }, false);
+    
+    container.addEventListener('touchend', (e) => {
+        isDragging = false;
+        handleSwipe();
+    }, false);
+    
+    // Also support mouse drag for desktop testing
+    let isMouseDown = false;
+    
+    container.addEventListener('mousedown', (e) => {
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+        isMouseDown = true;
+    });
+    
+    container.addEventListener('mousemove', (e) => {
+        if (isMouseDown) {
+            touchEndX = e.clientX;
+            touchEndY = e.clientY;
+        }
+    });
+    
+    container.addEventListener('mouseup', (e) => {
+        if (isMouseDown) {
+            isMouseDown = false;
+            handleSwipe();
+        }
+    });
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     initVehicleSlider();
+    initSwipeListeners();
 });
 
 // Handle window resize for responsive slider
@@ -253,6 +334,7 @@ window.addEventListener('resize', () => {
         const newItemsPerView = getVehicleItemsPerView();
         if (newItemsPerView !== vehicleItemsPerView) {
             vehicleCurrentSlide = 0;
+            vehicleItemsPerView = newItemsPerView;
             initVehicleSlider();
         } else {
             updateVehicleSlider();

@@ -9,7 +9,6 @@ html {
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
-    touch-action: manipulation;
 }
 
 body {
@@ -18,9 +17,7 @@ body {
     background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
     line-height: 1.6;
     overflow-x: hidden;
-    -webkit-user-scalable: no;
     -webkit-touch-callout: none;
-    touch-action: manipulation;
 }
 
 /* FLOATING WHATSAPP BUTTON */
@@ -1111,13 +1108,14 @@ nav {
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: flex;
-    align-items: center;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+}
+
+.vehicles-slider-container:active {
+    cursor: grabbing;
 }
 
 .vehicles-slider {
@@ -1128,7 +1126,7 @@ nav {
     padding: 0;
     margin: 0;
     align-items: stretch;
-    scroll-snap-type: x proximity;
+    transition: transform 0.5s ease-out;
 }
 
 .vehicle-card {
@@ -1143,8 +1141,8 @@ nav {
     box-sizing: border-box;
     backdrop-filter: blur(10px);
     min-height: 0;
-    scroll-snap-align: start;
-    scroll-snap-stop: auto;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .vehicle-card:hover {
@@ -1175,7 +1173,6 @@ nav {
     object-position: center;
     display: block;
     image-rendering: -webkit-optimize-contrast;
-    will-change: auto;
 }
 
 .vehicle-info {
@@ -1309,17 +1306,14 @@ nav {
 @media (max-width: 1024px) and (min-width: 768px) {
     .vehicle-card {
         flex: 0 0 calc(50% - 0.75rem);
-        scroll-snap-align: start;
     }
 
     .vehicles-slider {
         gap: 1.2rem;
-        scroll-snap-type: x proximity;
     }
 
     .vehicle-image {
         height: 160px;
-        transform: translateZ(0);
     }
 
     .vehicle-image img {
@@ -1376,18 +1370,14 @@ nav {
 
     .vehicle-card {
         flex: 0 0 100%;
-        scroll-snap-align: start;
-        scroll-snap-stop: auto;
     }
 
     .vehicles-slider {
         gap: 1rem;
-        scroll-snap-type: x proximity;
     }
 
     .vehicle-image {
         height: 140px;
-        transform: translateZ(0);
     }
 
     .vehicle-image img {
@@ -2305,35 +2295,6 @@ html {
     html, body {
         max-width: 100vw;
         overflow-x: hidden;
-        -webkit-user-scalable: no;
-        user-scalable: no;
-        touch-action: pan-y pinch-zoom;
-    }
-
-    .vehicles-slider-container {
-        overflow: hidden;
-        max-width: calc(100vw - 0px);
-        width: 100%;
-        touch-action: pan-y;
-    }
-
-    .vehicles-slider {
-        contain: layout style paint;
-        display: flex;
-        width: fit-content;
-        will-change: transform;
-        backface-visibility: hidden;
-        touch-action: pan-y;
-    }
-
-    .vehicle-card {
-        flex: 0 0 calc(100vw - 30px);
-        max-width: calc(100vw - 30px);
-        overflow: hidden;
-        will-change: transform;
-        backface-visibility: hidden;
-        transform: translateZ(0);
-        touch-action: manipulation;
     }
 
     .hero-title { font-size: 1.6rem !important; }
@@ -2345,7 +2306,6 @@ html {
     .features { padding: 2rem 3% !important; }
     .rental-types { padding: 2rem 3% !important; }
     .vehicles { padding: 2rem 3% !important; }
-    .vehicles-slider-container { overflow: hidden !important; }
     .how-it-works { padding: 2rem 3% !important; }
     .location { padding: 2rem 3% !important; }
     .whatsapp-float { width: 55px !important; height: 55px !important; }
