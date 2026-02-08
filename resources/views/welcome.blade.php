@@ -252,7 +252,7 @@
                     <div class="vehicle-specs">
                         <span><i class="fas fa-star" style="color: #FFD700;"></i> Premium Class</span>
                     </div>
-                    <div class="vehicle-price" style="color: #FFD700; font-weight: bold;">Hubungi Admin untuk Harga</div>
+                    <div class="vehicle-price" style="color: #53480a; font-weight: bold;">Hubungi Admin untuk Harga</div>
                     <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20tertarik%20dengan%20BUS%20PARAWISATA.%20Mohon%20informasi%20harga%20dan%20ketersediaan.%20Terima%20kasih." target="_blank" class="vehicle-btn">
                         Call Admin
                     </a>
