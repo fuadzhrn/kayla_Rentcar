@@ -1112,7 +1112,6 @@ nav {
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
 }
 
 .vehicles-slider {
@@ -1121,10 +1120,8 @@ nav {
     transition: transform 0.5s ease-out;
     width: 100%;
     will-change: transform;
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
+    transform: translateZ(0);
+    contain: layout style paint;
 }
 
 .vehicle-card {
@@ -1138,11 +1135,9 @@ nav {
     flex-direction: column;
     box-sizing: border-box;
     backdrop-filter: blur(10px);
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
     min-height: 0;
+    will-change: auto;
+    transform: translateZ(0) rotate(0deg);
 }
 
 .vehicle-card:hover {
@@ -1162,19 +1157,20 @@ nav {
     border-bottom: 1px solid rgba(255, 215, 0, 0.1);
     position: relative;
     flex-shrink: 0;
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
+    contain: content;
+    transform: translateZ(0);
 }
 
 .vehicle-image img {
     width: 85%;
     height: auto;
     max-height: 180px;
+    min-height: 80px;
     object-fit: contain;
     object-position: center;
     display: block;
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+    will-change: auto;
 }
 
 .vehicle-info {
@@ -1316,10 +1312,14 @@ nav {
 
     .vehicle-image {
         height: 160px;
+        contain: content;
+        transform: translateZ(0);
     }
 
     .vehicle-image img {
         max-height: 140px;
+        min-height: 70px;
+        image-rendering: -webkit-optimize-contrast;
     }
 
     .vehicle-info {
@@ -1372,11 +1372,15 @@ nav {
 
     .vehicle-image {
         height: 140px;
+        contain: content;
+        transform: translateZ(0);
     }
 
     .vehicle-image img {
         width: 80%;
         max-height: 120px;
+        min-height: 60px;
+        image-rendering: -webkit-optimize-contrast;
     }
 
     .vehicle-info {

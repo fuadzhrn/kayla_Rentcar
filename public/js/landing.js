@@ -196,7 +196,11 @@ function updateVehicleSlider() {
     const gapValue = window.innerWidth <= 767 ? 16 : (window.innerWidth <= 1024 ? 19.2 : 24);
     const offset = -(vehicleCurrentSlide * (cardWidth + gapValue));
     
-    slider.style.transform = `translateX(${offset}px)`;
+    // Force repaint for iOS
+    slider.style.transform = `translate3d(${offset}px, 0, 0)`;
+    
+    // Trigger repaint on iOS
+    void slider.offsetHeight;
     
     // Update dots
     document.querySelectorAll('.slider-dot').forEach((dot, idx) => {
