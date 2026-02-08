@@ -344,13 +344,21 @@
 
     <script>
         // Handle sidebar dropdown toggle untuk Manajemen Kendaraan
-        document.getElementById('vehicles-toggle').addEventListener('click', function(e) {
-            e.preventDefault();
-            const submenu = document.getElementById('vehicles-submenu');
-            const menuItem = document.getElementById('vehicles-menu-item');
+        document.addEventListener('DOMContentLoaded', function() {
+            const vehiclesToggle = document.getElementById('vehicles-toggle');
             
-            submenu.classList.toggle('show');
-            menuItem.classList.toggle('menu-open');
+            if (vehiclesToggle) {
+                vehiclesToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const submenu = document.getElementById('vehicles-submenu');
+                    const menuItem = document.getElementById('vehicles-menu-item');
+                    
+                    if (submenu && menuItem) {
+                        submenu.classList.toggle('show');
+                        menuItem.classList.toggle('menu-open');
+                    }
+                });
+            }
         });
     </script>
 
