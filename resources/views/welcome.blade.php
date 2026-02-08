@@ -108,7 +108,7 @@
                 <div class="stat-label">Pelanggan Puas</div>
             </div>
             <div class="stat-box scroll-fade">
-                <div class="stat-number" data-value="{{ count($vehicles) }}">{{ count($vehicles) }}+</div>
+                <div class="stat-number" data-value="{{ count($vehicles) + 3 }}">{{ count($vehicles) + 3 }}+</div>
                 <div class="stat-label">Kendaraan Tersedia</div>
             </div>
             <div class="stat-box scroll-fade">
@@ -185,21 +185,6 @@
         <h2 class="section-title">Armada <span>Kendaraan</span></h2>
         <div class="vehicles-slider-container">
             <div class="vehicles-slider">
-            <!-- Static Vehicle Card - HIACE COMMUTER -->
-            <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><img src="/img/gambar17.png" alt="HIACE COMMUTER"></div>
-                <div class="vehicle-info">
-                    <h4>HIACE COMMUTER</h4>
-                    <div class="vehicle-specs">
-                        <span><i class="fas fa-star" style="color: #FFD700;"></i> Premium Class</span>
-                    </div>
-                    <div class="vehicle-price" style="color: #FFD700; font-weight: bold;">Hubungi Admin untuk Harga</div>
-                    <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20tertarik%20dengan%20HIACE%20COMMUTER.%20Mohon%20informasi%20harga%20dan%20ketersediaan.%20Terima%20kasih." target="_blank" class="vehicle-btn">
-                        Call Admin
-                    </a>
-                </div>
-            </div>
-
             @forelse($vehicles as $vehicle)
             <div class="vehicle-card scroll-fade">
                 <div class="vehicle-image"><img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}"></div>
@@ -230,6 +215,49 @@
                 </div>
             </div>
             @endforelse
+
+            <!-- Static Vehicle Card - HIACE COMMUTER -->
+            <div class="vehicle-card scroll-fade">
+                <div class="vehicle-image"><img src="/img/gambar17.png" alt="HIACE COMMUTER"></div>
+                <div class="vehicle-info">
+                    <h4>HIACE COMMUTER</h4>
+                    <div class="vehicle-specs">
+                        <span><i class="fas fa-star" style="color: #FFD700;"></i> Premium Class</span>
+                    </div>
+                    <div class="vehicle-price" style="color: #FFD700; font-weight: bold;">Hubungi Admin untuk Harga</div>
+                    <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20tertarik%20dengan%20HIACE%20COMMUTER.%20Mohon%20informasi%20harga%20dan%20ketersediaan.%20Terima%20kasih." target="_blank" class="vehicle-btn">
+                        Call Admin
+                    </a>
+                </div>
+            </div>
+
+            <div class="vehicle-card scroll-fade">
+                <div class="vehicle-image"><img src="/img/gambar19.png" alt="MOBIL ELF"></div>
+                <div class="vehicle-info">
+                    <h4>MOBIL ELF</h4>
+                    <div class="vehicle-specs">
+                        <span><i class="fas fa-star" style="color: #FFD700;"></i> Premium Class</span>
+                    </div>
+                    <div class="vehicle-price" style="color: #FFD700; font-weight: bold;">Hubungi Admin untuk Harga</div>
+                    <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20tertarik%20dengan%20MOBIL%20ELF.%20Mohon%20informasi%20harga%20dan%20ketersediaan.%20Terima%20kasih." target="_blank" class="vehicle-btn">
+                        Call Admin
+                    </a>
+                </div>
+            </div>
+
+            <div class="vehicle-card scroll-fade">
+                <div class="vehicle-image"><img src="/img/gambar18.png" alt="BUS PARAWISATA"></div>
+                <div class="vehicle-info">
+                    <h4>BUS PARAWISATA</h4>
+                    <div class="vehicle-specs">
+                        <span><i class="fas fa-star" style="color: #FFD700;"></i> Premium Class</span>
+                    </div>
+                    <div class="vehicle-price" style="color: #FFD700; font-weight: bold;">Hubungi Admin untuk Harga</div>
+                    <a href="https://wa.me/6285888212282?text=Halo%20Kalya%20Rentcar%2C%20saya%20tertarik%20dengan%20BUS%20PARAWISATA.%20Mohon%20informasi%20harga%20dan%20ketersediaan.%20Terima%20kasih." target="_blank" class="vehicle-btn">
+                        Call Admin
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="slider-controls">
             <button class="slider-btn slider-prev" onclick="prevVehicle()">

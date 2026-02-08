@@ -152,199 +152,99 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Vehicle Slider
+// ===== VEHICLE SLIDER =====
 let vehicleCurrentSlide = 0;
 let vehicleTotalSlides = 0;
-let itemsPerView = 4;
-let maxVehicleSlide = 0;
+let vehicleItemsPerView = 4;
 
-function getItemsPerView() {
+function getVehicleItemsPerView() {
     const width = window.innerWidth;
-    if (width <= 767) return 1;
-    if (width <= 1024) return 2;
-    return 4;
+    if (width <= 767) return 1;  // Mobile
+    if (width <= 1024) return 2; // Tablet
+    return 4;                     // Desktop
 }
 
-function initSlider() {
+function initVehicleSlider() {
     const vehicleCards = document.querySelectorAll('.vehicle-card');
-    vehicleTotalSlides = vehicleCards.length;
-    
     const dotsContainer = document.getElementById('sliderDots');
-    if (!dotsContainer) return;
     
+    if (!vehicleCards.length || !dotsContainer) return;
+    
+    vehicleTotalSlides = vehicleCards.length;
+    vehicleItemsPerView = getVehicleItemsPerView();
+    vehicleCurrentSlide = 0;
+    
+    // Create dots
     dotsContainer.innerHTML = '';
-    itemsPerView = getItemsPerView();
-    maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
+    const maxDots = Math.max(0, vehicleTotalSlides - vehicleItemsPerView + 1);
     
-    // Debug log
-    console.log(`Slider initialized: totalSlides=${vehicleTotalSlides}, itemsPerView=${itemsPerView}, maxVehicleSlide=${maxVehicleSlide}`);
-    
-    // Create one dot per vehicle (not per page)
-    for (let i = 0; i < vehicleTotalSlides; i++) {
+    for (let i = 0; i < maxDots; i++) {
         const dot = document.createElement('div');
         dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
         dot.onclick = () => goToVehicleSlide(i);
         dotsContainer.appendChild(dot);
     }
     
-    vehicleCurrentSlide = 0;
     updateVehicleSlider();
 }
 
 function updateVehicleSlider() {
     const slider = document.querySelector('.vehicles-slider');
-    const container = document.querySelector('.vehicles-slider-container');
-    if (!slider || !container) return;
+    if (!slider) return;
     
-    // Use container width for responsive offset calculation
-    const containerWidth = container.offsetWidth;
-    const offset = -(vehicleCurrentSlide * containerWidth);
-    
-    // Debug: Show calculation
-    console.log(`📊 Offset Calc: currentSlide=${vehicleCurrentSlide}, containerWidth=${containerWidth}px, offset=${offset}px`);
+    const cardWidth = slider.querySelector('.vehicle-card')?.offsetWidth || 0;
+    const gapValue = window.innerWidth <= 767 ? 16 : (window.innerWidth <= 1024 ? 19.2 : 24);
+    const offset = -(vehicleCurrentSlide * (cardWidth + gapValue));
     
     slider.style.transform = `translateX(${offset}px)`;
     
     // Update dots
-    document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === vehicleCurrentSlide);
+    document.querySelectorAll('.slider-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === vehicleCurrentSlide);
     });
     
-    // All buttons always active (infinite carousel)
+    // Update button states
     const prevBtn = document.querySelector('.slider-prev');
     const nextBtn = document.querySelector('.slider-next');
+    const maxSlide = Math.max(0, vehicleTotalSlides - vehicleItemsPerView);
     
-    if (prevBtn) {
-        prevBtn.disabled = false;
-        prevBtn.style.opacity = '1';
-        prevBtn.style.cursor = 'pointer';
-    }
-    
-    if (nextBtn) {
-        nextBtn.disabled = false;
-        nextBtn.style.opacity = '1';
-        nextBtn.style.cursor = 'pointer';
-    }
+    if (prevBtn) prevBtn.disabled = vehicleCurrentSlide === 0;
+    if (nextBtn) nextBtn.disabled = vehicleCurrentSlide >= maxSlide;
 }
 
 function nextVehicle() {
-    // Move to next slide
-    vehicleCurrentSlide++;
-    
-    // Wrap around to beginning if exceeding max
-    if (vehicleCurrentSlide > maxVehicleSlide) {
-        vehicleCurrentSlide = 0;
-        console.log(`🔁 WRAPPING FORWARD: Reset to slide 0`);
+    const maxSlide = Math.max(0, vehicleTotalSlides - vehicleItemsPerView);
+    if (vehicleCurrentSlide < maxSlide) {
+        vehicleCurrentSlide++;
+        updateVehicleSlider();
     }
-    
-    console.log(`→ Next: currentSlide=${vehicleCurrentSlide}, maxSlide=${maxVehicleSlide}, totalSlides=${vehicleTotalSlides}`);
-    updateVehicleSlider();
 }
 
 function prevVehicle() {
-    // Move to previous slide
-    vehicleCurrentSlide--;
-    
-    // Wrap around to end if going below 0
-    if (vehicleCurrentSlide < 0) {
-        vehicleCurrentSlide = maxVehicleSlide;
-        console.log(`🔁 WRAPPING BACKWARD: Reset to slide ${maxVehicleSlide}`);
+    if (vehicleCurrentSlide > 0) {
+        vehicleCurrentSlide--;
+        updateVehicleSlider();
     }
-    
-    console.log(`← Prev: currentSlide=${vehicleCurrentSlide}, maxSlide=${maxVehicleSlide}, totalSlides=${vehicleTotalSlides}`);
-    updateVehicleSlider();
 }
 
 function goToVehicleSlide(index) {
-    // Allow infinite wrapping by allowing any index
-    vehicleCurrentSlide = index;
-    
-    // Wrap if needed
-    if (vehicleCurrentSlide > maxVehicleSlide) {
-        vehicleCurrentSlide = vehicleCurrentSlide % (maxVehicleSlide + 1);
-    }
-    if (vehicleCurrentSlide < 0) {
-        vehicleCurrentSlide = maxVehicleSlide;
-    }
-    
+    const maxSlide = Math.max(0, vehicleTotalSlides - vehicleItemsPerView);
+    vehicleCurrentSlide = Math.max(0, Math.min(index, maxSlide));
     updateVehicleSlider();
 }
 
-// Swipe/Touch/Mouse Drag handling
-let touchStartX = 0;
-let isDragging = false;
-
-document.addEventListener('DOMContentLoaded', function() {
-    initSlider();
-    
-    const container = document.querySelector('.vehicles-slider-container');
-    if (container) {
-        // Touch events
-        container.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-            isDragging = true;
-        }, { passive: true });
-        
-        container.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            const touchEndX = e.changedTouches[0].clientX;
-            const difference = touchStartX - touchEndX;
-            
-            if (Math.abs(difference) > 50) {
-                if (difference > 0) {
-                    nextVehicle();  // Will wrap around automatically
-                } else {
-                    prevVehicle();  // Will wrap around automatically
-                }
-            }
-            isDragging = false;
-        }, { passive: true });
-        
-        // Mouse drag events for desktop
-        container.addEventListener('mousedown', (e) => {
-            touchStartX = e.clientX;
-            isDragging = true;
-            container.style.cursor = 'grabbing';
-        });
-        
-        container.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-        });
-        
-        container.addEventListener('mouseup', (e) => {
-            if (!isDragging) return;
-            const touchEndX = e.clientX;
-            const difference = touchStartX - touchEndX;
-            
-            if (Math.abs(difference) > 50) {
-                if (difference > 0) {
-                    nextVehicle();  // Will wrap around automatically
-                } else {
-                    prevVehicle();  // Will wrap around automatically
-                }
-            }
-            isDragging = false;
-            container.style.cursor = 'grab';
-        });
-        
-        container.addEventListener('mouseleave', () => {
-            isDragging = false;
-            container.style.cursor = 'grab';
-        });
-        
-        // Initial cursor style
-        container.style.cursor = 'grab';
-    }
-});
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initVehicleSlider);
 
 // Handle window resize for responsive slider
 let resizeTimer;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-        const newItemsPerView = getItemsPerView();
-        if (newItemsPerView !== itemsPerView) {
-            initSlider();
+        const newItemsPerView = getVehicleItemsPerView();
+        if (newItemsPerView !== vehicleItemsPerView) {
+            vehicleCurrentSlide = 0;
+            initVehicleSlider();
         } else {
             updateVehicleSlider();
         }

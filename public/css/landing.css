@@ -1099,9 +1099,10 @@ nav {
     line-height: 1.6;
 }
 
-/* VEHICLES */
+/* VEHICLES - DESKTOP FIRST */
 .vehicles {
     padding: 5rem 5%;
+    background: rgba(10, 10, 10, 0.5);
 }
 
 .vehicles-slider-container {
@@ -1109,95 +1110,96 @@ nav {
     overflow: hidden;
     width: 100%;
     margin: 0 auto;
-    touch-action: pan-y;
-    padding: 0 1rem;
+    padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 .vehicles-slider {
     display: flex;
-    transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-    gap: 1rem;
+    gap: 1.5rem;
+    transition: transform 0.5s ease-out;
     width: 100%;
-    will-change: transform;
-    backface-visibility: hidden;
 }
 
 .vehicle-card {
-    flex: 0 0 calc(25% - 0.75rem);
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    border-radius: 12px;
-    overflow: visible;
-    transition: all 0.3s ease;
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    opacity: 1 !important;
-    visibility: visible !important;
-    height: auto;
-    box-sizing: border-box;
+    flex: 0 0 calc(25% - 1.125rem);
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
 }
 
 .vehicle-card:hover {
     border-color: #FFD700;
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
 }
 
 .vehicle-image {
     width: 100%;
-    height: auto;
-    max-height: 160px;
+    height: 200px;
     background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: #FFD700;
-    overflow: visible;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    position: relative;
 }
 
 .vehicle-image img {
-    width: 100%;
+    width: 85%;
     height: auto;
+    max-height: 180px;
     object-fit: contain;
     object-position: center;
 }
 
 .vehicle-info {
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    gap: 0.8rem;
 }
 
 .vehicle-info h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    margin: 0;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #fff;
 }
 
 .vehicle-specs {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    margin: 0.5rem 0;
-    font-size: 0.85rem;
-    color: #b0b0b0;
+    gap: 0.6rem;
+    margin: 0;
+    font-size: 0.8rem;
+    color: #a0a0a0;
+}
+
+.vehicle-specs span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .vehicle-specs i {
     color: #FFD700;
-    margin-right: 0.5rem;
+    width: 14px;
+    font-size: 0.8rem;
 }
 
 .vehicle-price {
     color: #FFD700;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin: 0.5rem 0;
     font-family: 'Montserrat', sans-serif;
@@ -1205,11 +1207,11 @@ nav {
 
 .vehicle-btn {
     width: 100%;
-    padding: 0.8rem;
-    background: #FFD700;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
     color: #000;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1221,58 +1223,201 @@ nav {
 }
 
 .vehicle-btn:hover {
-    background: #FFC700;
     transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
 }
 
 .slider-controls {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
     margin-top: 3rem;
 }
 
 .slider-btn {
-    display: none !important;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
     background: rgba(255, 215, 0, 0.1);
     border: 2px solid #FFD700;
     color: #FFD700;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.slider-btn:hover {
+.slider-btn:hover:not(:disabled) {
     background: #FFD700;
     color: #000;
-    transform: scale(1.1);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    transform: scale(1.08);
+}
+
+.slider-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .slider-dots {
-    display: none;
-    gap: 0.8rem;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
 }
 
 .slider-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.25);
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
 
+.slider-dot:hover {
+    background: rgba(255, 215, 0, 0.5);
+}
+
 .slider-dot.active {
     background: #FFD700;
-    transform: scale(1.3);
+    width: 32px;
+    border-radius: 5px;
+}
+
+/* ===== TABLET VEHICLES (768px - 1024px) ===== */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .vehicle-card {
+        flex: 0 0 calc(50% - 0.75rem);
+    }
+
+    .vehicles-slider {
+        gap: 1.2rem;
+    }
+
+    .vehicle-image {
+        height: 160px;
+    }
+
+    .vehicle-image img {
+        max-height: 140px;
+    }
+
+    .vehicle-info {
+        padding: 1.2rem;
+        gap: 0.6rem;
+    }
+
+    .vehicle-info h4 {
+        font-size: 1rem;
+    }
+
+    .vehicle-specs {
+        gap: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .vehicle-price {
+        font-size: 1.1rem;
+    }
+
+    .vehicle-btn {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    .slider-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+
+    .slider-controls {
+        gap: 1.5rem;
+    }
+}
+
+/* ===== MOBILE VEHICLES (≤767px) ===== */
+@media (max-width: 767px) {
+    .vehicles {
+        padding: 3rem 1rem;
+    }
+
+    .vehicle-card {
+        flex: 0 0 calc(100% - 0.5rem);
+    }
+
+    .vehicles-slider {
+        gap: 1rem;
+    }
+
+    .vehicle-image {
+        height: 140px;
+    }
+
+    .vehicle-image img {
+        width: 80%;
+        max-height: 120px;
+    }
+
+    .vehicle-info {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .vehicle-info h4 {
+        font-size: 0.95rem;
+    }
+
+    .vehicle-specs {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+        font-size: 0.7rem;
+    }
+
+    .vehicle-specs span {
+        gap: 0.3rem;
+    }
+
+    .vehicle-specs i {
+        width: 12px;
+        font-size: 0.7rem;
+    }
+
+    .vehicle-price {
+        font-size: 1rem;
+        margin: 0.3rem 0;
+    }
+
+    .vehicle-btn {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .slider-controls {
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        display: none;
+    }
+
+    .slider-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .slider-dot.active {
+        width: 24px;
+    }
+}
 }
 
 /* HOW IT WORKS */
@@ -1941,142 +2086,7 @@ html {
     .feature-card p {
         font-size: 0.85rem;
     }
-    /* VEHICLES */
-    .vehicles {
-        padding: 2.5rem 1rem;
-    }
-
-    .vehicles-slider-container {
-        overflow: hidden;
-        scroll-behavior: smooth;
-        padding: 0;
-        box-sizing: border-box;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .vehicles-slider {
-        gap: 0.5rem;
-        width: 100%;
-        display: flex;
-    }
-
-    .vehicle-card {
-        flex: 0 0 calc(100% - 0.5rem);
-        min-width: calc(100% - 0.5rem);
-        max-width: calc(100% - 0.5rem);
-        will-change: transform;
-        backface-visibility: hidden;
-        opacity: 1 !important;
-        visibility: visible !important;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        background: rgba(20, 20, 20, 0.8);
-        border: 1px solid rgba(255, 215, 0, 0.2);
-        border-radius: 12px;
-        overflow: visible;
-        transition: all 0.3s ease;
-        padding: 0;
-    }
-
-    .vehicle-image {
-        width: 100%;
-        height: auto;
-        min-height: 100px;
-        max-height: 100px;
-        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
-        color: #FFD700;
-        overflow: hidden;
-        border-radius: 12px 12px 0 0;
-    }
-
-    .vehicle-image img {
-        width: 85%;
-        height: auto;
-        max-height: 100px;
-        object-fit: contain;
-        object-position: center;
-    }
-
-    .vehicle-info {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        gap: 0.4rem;
-    }
-
-    .vehicle-info h4 {
-        font-size: 1rem;
-        margin: 0;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        color: #fff;
-    }
-
-    .vehicle-specs {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0.35rem;
-        margin: 0;
-        font-size: 0.75rem;
-        color: #b0b0b0;
-    }
-
-    .vehicle-specs span {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-    }
-
-    .vehicle-specs i {
-        color: #FFD700;
-        width: 16px;
-        text-align: center;
-        flex-shrink: 0;
-    }
-
-    .vehicle-price {
-        color: #FFD700;
-        font-size: 1rem;
-        font-weight: 700;
-        margin: 0.2rem 0 0.3rem 0;
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .vehicle-btn {
-        width: 100%;
-        padding: 0.7rem 0.8rem;
-        background: #FFD700;
-        color: #000;
-        border: none;
-        border-radius: 6px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-family: 'Poppins', sans-serif;
-        display: block;
-        text-align: center;
-        text-decoration: none;
-        margin-top: auto;
-        font-size: 0.85rem;
-    }
-
-    .vehicle-btn:hover {
-        background: #FFC700;
-        transform: translateY(-2px);
-    }
-
-    .slider-controls {
-        gap: 1rem;
-        margin-top: 1.5rem;
-        justify-content: center;
-    }
+    /* VEHICLES - MOBILE CSS REMOVED FOR DEBUGGING */
 
     .slider-btn {
         width: 36px;
