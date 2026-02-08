@@ -47,83 +47,100 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.addEventListener('DOMContentLoaded', () => {
+function initializeScrollFade() {
     const scrollFadeElements = document.querySelectorAll('.scroll-fade');
     
-    scrollFadeElements.forEach((el) => {
-        // Check if element is already in viewport
-        const rect = el.getBoundingClientRect();
-        const isInViewport = (
-            rect.top < window.innerHeight &&
-            rect.bottom > 0
-        );
-        
-        if (isInViewport) {
-            // Element is in viewport, make it visible immediately
+    if (scrollFadeElements.length > 0) {
+        scrollFadeElements.forEach((el) => {
+            // Ensure element starts visible
             el.classList.add('visible');
             el.classList.remove('lazy');
-        } else {
-            // Element not in viewport, add lazy class for animation
-            el.classList.add('lazy');
-        }
-        
-        // Observe for future viewport changes
-        observer.observe(el);
-    });
-});
+            
+            // Observe for future viewport changes
+            observer.observe(el);
+        });
+    }
+}
+
+// Call on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initializeScrollFade);
+
+// Also call on window load as backup
+window.addEventListener('load', initializeScrollFade);
+
+// Call immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeScrollFade);
+} else {
+    initializeScrollFade();
+}
 
 // Counter animation
-const counterObserverOptions = {
-    threshold: 0.5
-};
+function initializeCounterAnimation() {
+    const counterObserverOptions = {
+        threshold: 0.5
+    };
 
-const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-            entry.target.classList.add('animated');
-            entry.target.classList.add('visible');
-            
-            // Small delay to ensure visibility before animation
-            setTimeout(() => {
-                const statNumbers = entry.target.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                entry.target.classList.add('animated');
+                entry.target.classList.add('visible');
                 
-                statNumbers.forEach(el => {
-                    const target = parseInt(el.getAttribute('data-value'));
-                    let current = 0;
-                    const increment = target / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            el.textContent = target + '+';
-                            clearInterval(timer);
-                        } else {
-                            el.textContent = Math.floor(current) + '+';
-                        }
-                    }, 30);
-                });
-            }, 100);
-            
-            counterObserver.unobserve(entry.target);
-        }
-    });
-}, counterObserverOptions);
+                // Small delay to ensure visibility before animation
+                setTimeout(() => {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    
+                    statNumbers.forEach(el => {
+                        const target = parseInt(el.getAttribute('data-value'));
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                el.textContent = target + '+';
+                                clearInterval(timer);
+                            } else {
+                                el.textContent = Math.floor(current) + '+';
+                            }
+                        }, 30);
+                    });
+                }, 100);
+                
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, counterObserverOptions);
 
-const statsSection = document.querySelector('.stats');
-if (statsSection) {
-    counterObserver.observe(statsSection);
+    const statsSection = document.querySelector('.stats');
+    if (statsSection) {
+        counterObserver.observe(statsSection);
+    }
+}
+
+// Initialize counter on load
+document.addEventListener('DOMContentLoaded', initializeCounterAnimation);
+window.addEventListener('load', initializeCounterAnimation);
+if (document.readyState === 'complete') {
+    initializeCounterAnimation();
 }
 
 // Smooth navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+function initializeSmoothNavigation() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && document.querySelector(href)) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', initializeSmoothNavigation);
+window.addEventListener('load', initializeSmoothNavigation);
 
 // Nav scroll effect
 window.addEventListener('scroll', () => {
