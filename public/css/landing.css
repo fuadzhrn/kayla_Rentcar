@@ -1236,7 +1236,7 @@ nav {
 }
 
 .slider-btn {
-    display: flex !important;
+    display: none !important;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -1996,6 +1996,7 @@ html {
     }
 
     .slider-btn {
+        display: none !important;
         width: 40px;
         height: 40px;
         font-size: 1rem;
