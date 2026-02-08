@@ -155,42 +155,38 @@ window.addEventListener('scroll', () => {
 // Vehicle Slider
 let vehicleCurrentSlide = 0;
 let vehicleTotalSlides = 0;
+let itemsPerView = 4;
+let maxVehicleSlide = 0;
 
 function getItemsPerView() {
-    if (window.innerWidth <= 767) return 1;
-    if (window.innerWidth <= 1024) return 2;
+    const width = window.innerWidth;
+    if (width <= 767) return 1;
+    if (width <= 1024) return 2;
     return 4;
 }
 
-function getItemWidth() {
-    if (window.innerWidth <= 767) return 100;
-    if (window.innerWidth <= 1024) return 50;
-    return 25;
-}
-
-let itemsPerView = getItemsPerView();
-let maxVehicleSlide = 0;
-
 function initSlider() {
-    // Count vehicles dynamically
     const vehicleCards = document.querySelectorAll('.vehicle-card');
     vehicleTotalSlides = vehicleCards.length;
     
     const dotsContainer = document.getElementById('sliderDots');
     if (!dotsContainer) return;
     
-    dotsContainer.innerHTML = ''; // Clear existing dots
-    
-    // Recalculate based on current window size
+    dotsContainer.innerHTML = '';
     itemsPerView = getItemsPerView();
     maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
     
-    for (let i = 0; i <= maxVehicleSlide; i++) {
+    // Debug log
+    console.log(`Slider initialized: totalSlides=${vehicleTotalSlides}, itemsPerView=${itemsPerView}, maxVehicleSlide=${maxVehicleSlide}`);
+    
+    // Create one dot per vehicle (not per page)
+    for (let i = 0; i < vehicleTotalSlides; i++) {
         const dot = document.createElement('div');
         dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
         dot.onclick = () => goToVehicleSlide(i);
         dotsContainer.appendChild(dot);
     }
+    
     vehicleCurrentSlide = 0;
     updateVehicleSlider();
 }
@@ -198,165 +194,159 @@ function initSlider() {
 function updateVehicleSlider() {
     const slider = document.querySelector('.vehicles-slider');
     const container = document.querySelector('.vehicles-slider-container');
+    if (!slider || !container) return;
     
-    if (!container || !slider) return;
+    // Use container width for responsive offset calculation
+    const containerWidth = container.offsetWidth;
+    const offset = -(vehicleCurrentSlide * containerWidth);
     
-    // Calculate gap in pixels
-    let gapPx;
-    if (window.innerWidth <= 767) {
-        gapPx = 16; // 1rem
-    } else if (window.innerWidth <= 1024) {
-        gapPx = 24; // 1.5rem
-    } else {
-        gapPx = 32; // 2rem
-    }
+    // Debug: Show calculation
+    console.log(`📊 Offset Calc: currentSlide=${vehicleCurrentSlide}, containerWidth=${containerWidth}px, offset=${offset}px`);
     
-    // Get actual card width from DOM (most reliable method)
-    const firstCard = document.querySelector('.vehicle-card');
-    if (!firstCard) return;
+    slider.style.transform = `translateX(${offset}px)`;
     
-    const cardWidthPx = firstCard.offsetWidth;
-    
-    // Offset = current slide number * (card width + gap between cards)
-    const offsetPx = -(vehicleCurrentSlide * (cardWidthPx + gapPx));
-    slider.style.transform = `translateX(${offsetPx}px)`;
-    
+    // Update dots
     document.querySelectorAll('.slider-dot').forEach((dot, index) => {
         dot.classList.toggle('active', index === vehicleCurrentSlide);
     });
+    
+    // All buttons always active (infinite carousel)
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+    
+    if (prevBtn) {
+        prevBtn.disabled = false;
+        prevBtn.style.opacity = '1';
+        prevBtn.style.cursor = 'pointer';
+    }
+    
+    if (nextBtn) {
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = '1';
+        nextBtn.style.cursor = 'pointer';
+    }
 }
 
 function nextVehicle() {
-    vehicleCurrentSlide = (vehicleCurrentSlide + 1) % (maxVehicleSlide + 1);
+    // Move to next slide
+    vehicleCurrentSlide++;
+    
+    // Wrap around to beginning if exceeding max
+    if (vehicleCurrentSlide > maxVehicleSlide) {
+        vehicleCurrentSlide = 0;
+        console.log(`🔁 WRAPPING FORWARD: Reset to slide 0`);
+    }
+    
+    console.log(`→ Next: currentSlide=${vehicleCurrentSlide}, maxSlide=${maxVehicleSlide}, totalSlides=${vehicleTotalSlides}`);
     updateVehicleSlider();
 }
 
 function prevVehicle() {
-    vehicleCurrentSlide = (vehicleCurrentSlide - 1 + (maxVehicleSlide + 1)) % (maxVehicleSlide + 1);
+    // Move to previous slide
+    vehicleCurrentSlide--;
+    
+    // Wrap around to end if going below 0
+    if (vehicleCurrentSlide < 0) {
+        vehicleCurrentSlide = maxVehicleSlide;
+        console.log(`🔁 WRAPPING BACKWARD: Reset to slide ${maxVehicleSlide}`);
+    }
+    
+    console.log(`← Prev: currentSlide=${vehicleCurrentSlide}, maxSlide=${maxVehicleSlide}, totalSlides=${vehicleTotalSlides}`);
     updateVehicleSlider();
 }
 
 function goToVehicleSlide(index) {
+    // Allow infinite wrapping by allowing any index
     vehicleCurrentSlide = index;
+    
+    // Wrap if needed
+    if (vehicleCurrentSlide > maxVehicleSlide) {
+        vehicleCurrentSlide = vehicleCurrentSlide % (maxVehicleSlide + 1);
+    }
+    if (vehicleCurrentSlide < 0) {
+        vehicleCurrentSlide = maxVehicleSlide;
+    }
+    
     updateVehicleSlider();
 }
 
-// Touch/Swipe functionality for mobile
+// Swipe/Touch/Mouse Drag handling
 let touchStartX = 0;
-let touchEndX = 0;
-const swipeThreshold = 50; // Minimum swipe distance in pixels
+let isDragging = false;
 
-function handleSwipe() {
-    const difference = touchStartX - touchEndX;
-    
-    if (Math.abs(difference) > swipeThreshold) {
-        if (difference > 0) {
-            // Swiped left - show next vehicle
-            nextVehicle();
-        } else {
-            // Swiped right - show previous vehicle
-            prevVehicle();
-        }
-    }
-}
-
-// Initialize slider when page loads
 document.addEventListener('DOMContentLoaded', function() {
     initSlider();
     
-    // Add touch listeners to slider container
-    const sliderContainer = document.querySelector('.vehicles-slider-container');
-    if (sliderContainer) {
-        sliderContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, false);
+    const container = document.querySelector('.vehicles-slider-container');
+    if (container) {
+        // Touch events
+        container.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            isDragging = true;
+        }, { passive: true });
         
-        sliderContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, false);
-    }
-});
-
-// Re-initialize slider on window resize
-window.addEventListener('resize', () => {
-    const newItemsPerView = getItemsPerView();
-    if (newItemsPerView !== itemsPerView) {
-        itemsPerView = newItemsPerView;
-        maxVehicleSlide = Math.max(0, vehicleTotalSlides - itemsPerView);
-        vehicleCurrentSlide = Math.min(vehicleCurrentSlide, maxVehicleSlide);
-        initSlider();
-    }
-});
-
-// Rental Slider
-
-// Grid layout for rental types (no slider needed)
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Lazy Loading for Vehicle Cards
-    const initLazyLoadVehicles = () => {
-        const slider = document.querySelector('.vehicles-slider');
-        const cards = document.querySelectorAll('.vehicle-card');
-        
-        if (!slider || cards.length === 0) return;
-        
-        // Mark all cards as lazy-loading initially
-        cards.forEach(card => {
-            card.classList.add('lazy-loading');
-        });
-        
-        // Create Intersection Observer
-        const lazyLoadObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Show card when visible
-                    entry.target.classList.remove('lazy-loading');
-                    entry.target.style.opacity = '1';
-                    entry.target.style.visibility = 'visible';
-                    entry.target.style.height = 'auto';
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const touchEndX = e.changedTouches[0].clientX;
+            const difference = touchStartX - touchEndX;
+            
+            if (Math.abs(difference) > 50) {
+                if (difference > 0) {
+                    nextVehicle();  // Will wrap around automatically
                 } else {
-                    // Hide card when not visible (but keep in DOM for smooth transition)
-                    entry.target.classList.add('lazy-loading');
-                    entry.target.style.opacity = '0';
-                    entry.target.style.visibility = 'hidden';
-                    entry.target.style.height = '0';
+                    prevVehicle();  // Will wrap around automatically
                 }
-            });
-        }, {
-            root: slider,
-            threshold: 0,
-            rootMargin: '200px' // Pre-load 200px before visible
+            }
+            isDragging = false;
+        }, { passive: true });
+        
+        // Mouse drag events for desktop
+        container.addEventListener('mousedown', (e) => {
+            touchStartX = e.clientX;
+            isDragging = true;
+            container.style.cursor = 'grabbing';
         });
         
-        // Observe all cards
-        cards.forEach(card => {
-            lazyLoadObserver.observe(card);
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
         });
-    };
-    
-    // Initialize hardware acceleration for vehicle cards
-    const vehicleCards = document.querySelectorAll('.vehicle-card');
-    vehicleCards.forEach(card => {
-        card.style.willChange = 'transform';
-        card.style.backfaceVisibility = 'hidden';
-        card.style.transform = 'translateZ(0)';
-        card.style.perspective = '1000px';
-    });
-    
-    const vehicleSlider = document.querySelector('.vehicles-slider');
-    if (vehicleSlider) {
-        vehicleSlider.style.willChange = 'transform';
-        vehicleSlider.style.backfaceVisibility = 'hidden';
+        
+        container.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            const touchEndX = e.clientX;
+            const difference = touchStartX - touchEndX;
+            
+            if (Math.abs(difference) > 50) {
+                if (difference > 0) {
+                    nextVehicle();  // Will wrap around automatically
+                } else {
+                    prevVehicle();  // Will wrap around automatically
+                }
+            }
+            isDragging = false;
+            container.style.cursor = 'grab';
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            container.style.cursor = 'grab';
+        });
+        
+        // Initial cursor style
+        container.style.cursor = 'grab';
     }
-    
-    // Call lazy load initialization
-    initLazyLoadVehicles();
 });
 
-// Re-initialize slider on window resize
+// Handle window resize for responsive slider
+let resizeTimer;
 window.addEventListener('resize', () => {
-    const newItemsPerView = getItemsPerView();
-    if (newItemsPerView !== itemsPerView) {
-        initSlider();
-    }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        const newItemsPerView = getItemsPerView();
+        if (newItemsPerView !== itemsPerView) {
+            initSlider();
+        } else {
+            updateVehicleSlider();
+        }
+    }, 250);
 });
