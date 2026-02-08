@@ -185,37 +185,6 @@
         <h2 class="section-title">Armada <span>Kendaraan</span></h2>
         <div class="vehicles-slider-container">
             <div class="vehicles-slider">
-            @forelse($vehicles as $vehicle)
-            <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image"><img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}"></div>
-                <div class="vehicle-info">
-                    <h4>{{ $vehicle->name }}</h4>
-                    <div class="vehicle-specs">
-                        <span><i class="fas fa-users"></i> {{ $vehicle->seat_capacity }} Penumpang</span>
-                        <span><i class="fas fa-gear"></i> {{ ucfirst($vehicle->transmission) }}</span>
-                        @if($vehicle->fuel_type)
-                        <span><i class="fas fa-gas-pump"></i> {{ ucfirst($vehicle->fuel_type) }}</span>
-                        @endif
-                        @if($vehicle->has_ac)
-                        <span><i class="fas fa-fan"></i> AC Dingin</span>
-                        @endif
-                    </div>
-                    <div class="vehicle-price">Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</div>
-                    <a href="calculator?vehicle={{ urlencode($vehicle->name) }}" class="vehicle-btn">Pesan Sekarang</a>
-                </div>
-            </div>
-            @empty
-            <div class="vehicle-card scroll-fade">
-                <div class="vehicle-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-car" style="font-size: 60px; color: #ccc;"></i>
-                </div>
-                <div class="vehicle-info">
-                    <h4>Tidak Ada Kendaraan</h4>
-                    <p style="color: #999; font-size: 14px;">Daftar kendaraan sedang tidak tersedia</p>
-                </div>
-            </div>
-            @endforelse
-
             <!-- Static Vehicle Card - HIACE COMMUTER -->
             <div class="vehicle-card scroll-fade">
                 <div class="vehicle-image"><img src="/img/gambar17.png" alt="HIACE COMMUTER"></div>
@@ -258,6 +227,37 @@
                     </a>
                 </div>
             </div>
+
+            @forelse($vehicles as $vehicle)
+            <div class="vehicle-card scroll-fade">
+                <div class="vehicle-image"><img src="{{ $vehicle->primary_image }}" alt="{{ $vehicle->name }}"></div>
+                <div class="vehicle-info">
+                    <h4>{{ $vehicle->name }}</h4>
+                    <div class="vehicle-specs">
+                        <span><i class="fas fa-users"></i> {{ $vehicle->seat_capacity }} Penumpang</span>
+                        <span><i class="fas fa-gear"></i> {{ ucfirst($vehicle->transmission) }}</span>
+                        @if($vehicle->fuel_type)
+                        <span><i class="fas fa-gas-pump"></i> {{ ucfirst($vehicle->fuel_type) }}</span>
+                        @endif
+                        @if($vehicle->has_ac)
+                        <span><i class="fas fa-fan"></i> AC Dingin</span>
+                        @endif
+                    </div>
+                    <div class="vehicle-price">Rp {{ number_format($vehicle->price_per_day, 0, ',', '.') }}/hari</div>
+                    <a href="calculator?vehicle={{ urlencode($vehicle->name) }}" class="vehicle-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            @empty
+            <div class="vehicle-card scroll-fade">
+                <div class="vehicle-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-car" style="font-size: 60px; color: #ccc;"></i>
+                </div>
+                <div class="vehicle-info">
+                    <h4>Tidak Ada Kendaraan</h4>
+                    <p style="color: #999; font-size: 14px;">Daftar kendaraan sedang tidak tersedia</p>
+                </div>
+            </div>
+            @endforelse
         </div>
         <div class="slider-controls">
             <button class="slider-btn slider-prev" onclick="prevVehicle()">

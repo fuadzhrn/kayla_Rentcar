@@ -1118,14 +1118,15 @@ nav {
     display: flex;
     gap: 1.5rem;
     transition: transform 0.5s ease-out;
-    width: 100%;
+    box-sizing: border-box;
     will-change: transform;
     transform: translateZ(0);
-    contain: layout style paint;
 }
 
 .vehicle-card {
     flex: 0 0 calc(25% - 1.125rem);
+    flex-grow: 0;
+    flex-shrink: 0;
     background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
     border: 1px solid rgba(255, 215, 0, 0.15);
     border-radius: 16px;
@@ -1157,7 +1158,6 @@ nav {
     border-bottom: 1px solid rgba(255, 215, 0, 0.1);
     position: relative;
     flex-shrink: 0;
-    contain: content;
     transform: translateZ(0);
 }
 
@@ -1304,6 +1304,8 @@ nav {
 @media (max-width: 1024px) and (min-width: 768px) {
     .vehicle-card {
         flex: 0 0 calc(50% - 0.75rem);
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     .vehicles-slider {
@@ -1312,7 +1314,6 @@ nav {
 
     .vehicle-image {
         height: 160px;
-        contain: content;
         transform: translateZ(0);
     }
 
@@ -1364,6 +1365,8 @@ nav {
 
     .vehicle-card {
         flex: 0 0 calc(100% - 0.5rem);
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     .vehicles-slider {
@@ -1372,7 +1375,6 @@ nav {
 
     .vehicle-image {
         height: 140px;
-        contain: content;
         transform: translateZ(0);
     }
 

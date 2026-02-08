@@ -192,15 +192,28 @@ function updateVehicleSlider() {
     const slider = document.querySelector('.vehicles-slider');
     if (!slider) return;
     
-    const cardWidth = slider.querySelector('.vehicle-card')?.offsetWidth || 0;
+    const cards = slider.querySelectorAll('.vehicle-card');
+    if (!cards.length) return;
+    
     const gapValue = window.innerWidth <= 767 ? 16 : (window.innerWidth <= 1024 ? 19.2 : 24);
-    const offset = -(vehicleCurrentSlide * (cardWidth + gapValue));
     
-    // Force repaint for iOS
-    slider.style.transform = `translate3d(${offset}px, 0, 0)`;
+    // Calculate card width more reliably for iOS
+    let cardWidth = 0;
+    if (cards[0]) {
+        const style = window.getComputedStyle(cards[0]);
+        const paddingLeft = parseFloat(style.paddingLeft) || 0;
+        const paddingRight = parseFloat(style.paddingRight) || 0;
+        cardWidth = cards[0].offsetWidth || 0;
+    }
     
-    // Trigger repaint on iOS
-    void slider.offsetHeight;
+    // Calculate offset with more precision
+    const totalOffset = vehicleCurrentSlide * (cardWidth + gapValue);
+    const offset = -totalOffset;
+    
+    // iOS fix: Apply transform with requestAnimationFrame
+    requestAnimationFrame(() => {
+        slider.style.transform = `translate3d(${offset}px, 0, 0)`;
+    });
     
     // Update dots
     document.querySelectorAll('.slider-dot').forEach((dot, idx) => {
