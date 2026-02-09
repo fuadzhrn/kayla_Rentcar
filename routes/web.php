@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VehiclePageController;
 use App\Http\Controllers\GalleryPageController;
 use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\VehicleController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -17,6 +18,9 @@ Route::get('/', [VehiclePageController::class, 'index']);
 Route::get('/gallery', [GalleryPageController::class, 'index']);
 
 Route::get('/calculator', [CalculatorController::class, 'index']);
+
+// Sitemap for SEO
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
