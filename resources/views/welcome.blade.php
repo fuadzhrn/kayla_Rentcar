@@ -1,49 +1,47 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#FFD700">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Kalya Rentcar - Layanan sewa mobil terpercaya di Jakarta. Armada 20+ kendaraan, harga kompetitif, asuransi lengkap, dan dukungan 24/7. Booking mudah dan cepat online.">
-    <meta name="keywords" content="sewa mobil jakarta, rental mobil, mobil rental, sewa mobil murah, rental mobil lepas kunci, mobil plus driver, sewa mobil harian, tour jakarta">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="language" content="Indonesian">
-    <meta name="author" content="Kalya Rentcar">
-    
-    <!-- Open Graph Tags (Social Media) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Kalya Rentcar - Solusi Rental Mobil Terpercaya">
-    <meta property="og:description" content="Sewa mobil terpercaya dengan armada 20+ kendaraan. Lepas kunci, mobil + driver, atau driver only. Asuransi lengkap, harga terjangkau, dukungan 24/7.">
-    <meta property="og:url" content="https://kalyarentcar.com">
-    <meta property="og:image" content="https://kalyarentcar.com/img/logo.png">
-    <meta property="og:site_name" content="Kalya Rentcar">
-    <meta property="og:locale" content="id_ID">
-    
-    <!-- Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kalya Rentcar - Solusi Rental Mobil Terpercaya">
-    <meta name="twitter:description" content="Sewa mobil terpercaya dengan armada 20+ kendaraan. Asuransi lengkap, harga terjangkau, dukungan 24/7.">
-    <meta name="twitter:image" content="https://kalyarentcar.com/img/logo.png">
-    
-    <!-- Additional SEO -->
-    <link rel="canonical" href="https://kalyarentcar.com">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-    
-    <title>Kalya Rentcar - Solusi Rental Mobil Terpercaya</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/landing.css">
+  <meta name="theme-color" content="#FFD700">
+
+  <!-- SEO -->
+  <title>Kalya Rentcar - Sewa Mobil Jakarta Lepas Kunci & Driver</title>
+  <meta name="description" content="Kalya Rentcar - sewa mobil terpercaya di Jakarta. Lepas kunci atau dengan driver, armada lengkap, harga kompetitif, dukungan 24/7. Booking cepat via WhatsApp.">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <link rel="canonical" href="https://kalyarentcar.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kalya Rentcar - Sewa Mobil Jakarta">
+  <meta property="og:description" content="Lepas kunci atau dengan driver. Armada lengkap, harga kompetitif, dukungan 24/7. Booking cepat via WhatsApp.">
+  <meta property="og:url" content="https://kalyarentcar.com/">
+  <meta property="og:image" content="https://kalyarentcar.com/img/logo.png">
+  <meta property="og:site_name" content="Kalya Rentcar">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kalya Rentcar - Sewa Mobil Jakarta">
+  <meta name="twitter:description" content="Lepas kunci atau dengan driver. Armada lengkap, harga kompetitif, dukungan 24/7.">
+  <meta name="twitter:image" content="https://kalyarentcar.com/img/logo.png">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" href="/img/favicon.png">
+
+  <!-- Fonts & CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ✅ Cache-busting CSS -->
+  <link rel="stylesheet" href="/css/landing.css?v=20260210">
 </head>
+
 <body>
     <!-- LOADING SCREEN -->
     <div class="loading-screen" id="loadingScreen">
