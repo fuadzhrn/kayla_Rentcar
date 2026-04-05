@@ -339,7 +339,7 @@
                         <div class="address-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="address-text">
                             <h4>Kantor Pusat</h4>
-                            <p>Jl. Kalibata Timur Raya Gg. Jami Nurul Islam, RT.10/RW.10, 1B, Kec. Pancoran, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12830</p>
+                            <p>Jl. Rambutan VII No.78, RT.4/RW.04, Pejaten Bar., Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12510</p>
                         </div>
                     </div>
                     <div class="address-item">
@@ -367,7 +367,7 @@
             </div>
 
             <div class="location-map scroll-fade" onclick="window.open('https://maps.app.goo.gl/DTn9DDJdJNc21b2VA', '_blank')" style="cursor: pointer; position: relative;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253825.47352509934!2d106.56154632568361!3d-6.260697372951346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f39efbdb8087%3A0x60460641e278555d!2sKALYA%20RENTCAR!5e0!3m2!1sid!2sid!4v1770415521235!5m2!1sid!2sid" style="width: 100%; height: 450px; border: 0; border-radius: 12px; pointer-events: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.920975812122!2d106.83328277573207!3d-6.274121161419755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f23ea14551b3%3A0x57f93cee8deeba1c!2sJl.%20Rambutan%20VII%20No.78%2C%20RT.4%2FRW.04%2C%20Pejaten%20Bar.%2C%20Ps.%20Minggu%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2012510!5e0!3m2!1sid!2sid!4v1775364802359!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.9); color: #1a1a1a; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.3s ease;">
                     <i class="fas fa-external-link-alt"></i> Buka di Google Maps
                 </div>
